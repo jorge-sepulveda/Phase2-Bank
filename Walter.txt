@@ -1,0 +1,22 @@
+This is what I posted on Piazza for my students--
+Here is how to use FLTK graphics on build.tamu.edu:
+
+1. If necessary, first start your X Window Server (e.g., Xming).
+
+2. Under Putty>Connection>SSH>X11, be sure "Enable X11 forwarding" is checked for your saved sessions for build.tamu.edu; then log in to build.  From a Mac or Linux terminal window, just type 
+ssh -Y accountname@build.tamu.edu
+(The -Y enables X11 forwarding.)
+ 
+3. Download all the files in
+http://courses.cse.tamu.edu/daugher/misc/PPP to a new directory as text files. If you are not at a CSE departmental computer you must use VPN.
+
+4. Compile with the command
+g++ -std=c++17 *cpp -lfltk -lfltk_images
+
+5. Run with
+./a.out
+
+You should get a window with two different-colored lines in it like a big plus sign. Clicking the "Next" button in the upper right-hand corner of the window should close it and exit the program. To write a different graphics program, edit sample_main4.cpp, or else delete sample_main4.cpp and write another cpp instead.
+
+You can also try the code in chapter 12. Remember the 4 steps described in lecture!
+
