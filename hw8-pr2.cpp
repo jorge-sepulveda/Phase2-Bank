@@ -265,7 +265,7 @@ Bank_window::Bank_window(Point xy, int w, int h, const string& title) :
         200,20,
         "O6:"),
   //big text box initializations.
-  bigBox(
+  bbox(
         Point(40,150),
         680,350,
         "L:"),
@@ -306,7 +306,7 @@ Bank_window::Bank_window(Point xy, int w, int h, const string& title) :
   attach(output_5);
   attach(output_6);
   
-  attach(bigBox);
+  attach(bbox);
   attach(next_button);
   attach(quit_button);
 
