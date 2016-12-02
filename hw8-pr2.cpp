@@ -117,7 +117,6 @@ private:
   Button quit_button;                // end program
   In_box next_x;                     // box for entering x coord of point to add
   In_box next_y;                     // box for entering y coord of point to add
-  Out_box xy_out;                    // box for displaying last points added
   In_box next_xx;                    // box for entering x coord of point to remove
   In_box next_yx;                    // box for entering y coord of point to remove
   Out_box xyx_out;                   // box for displaying last points removed
@@ -135,20 +134,20 @@ private:
   Out_box all_out;
   
   //inboxes below the top bar
-  In_box input_1;
+  /*In_box input_1;
   In_box input_2;
   In_box input_3;
   In_box input_4;
   In_box input_5;
-  In_box input_6;
+  In_box input_6;*/
   
   //outboxes below the input boxes initializing
-  Out_box output_1;
+  /*Out_box output_1;
   Out_box output_2;
   Out_box output_3;
   Out_box output_4;
   Out_box output_5;
-  Out_box output_6;
+  Out_box output_6;*/
   
   // function members
 
@@ -367,7 +366,6 @@ void DLL_window::next() {
   // coordinate & scalar info and use the out boxes
   stringstream ss;
   ss << '(' << x << ',' << y << ')';
-  xy_out.put(ss.str());
   stringstream ssx;
   ssx << '(' << xx << ',' << yx << ')';
   xyx_out.put(ssx.str());
