@@ -65,53 +65,41 @@ ostream& operator<<( ostream&os, Bank& b )
 }
 
 // Import the whole Bank from a file
-/*istream& operator>>( istream& is, Bank& b )
+istream& operator>>( istream& is, Bank& b )
 {
+    // buffers for each line of the file as it is read
+    string line;
+    istringstream iss;
+    
+    getline( is, line );  // read a single line from the file
+    iss.str( line );        // convert string into istringstream object
+    
+    // import the default symbol for the bank
     Symbol s;
     int c;
-    is >> c;
+    iss >> c;
     s = static_cast<Symbol>(c);
     b.setDefaultSymbol( s );
     
+    // import the money for the Bank
     Money m;
-    is >> m;
+    iss >> m;
     b.setMoney( m );
     
-    is.clear();
+    iss.clear(); // before re-using the istringstream object, clear the flags
+    getline( is, line );  // read a single line from the file
+    iss.str(line);        // convert into istringstream object
     
+    Patron p; // Construct a blank patron object
+    while( iss >> p ){ b.addPatron( p ); }
+    
+    iss.clear(); // before re-using the istringstream object, clear the flags
+    getline( is, line );  // read a single line from the file
+    iss.str(line);        // convert into istringstream object
+    
+    Transaction t; // Construct a blank patron object
+    while( iss >> t ){ b.addTransaction( t ); }
+    
+    return is; // always return the istream
+}
 
-    string line("");
-    getline( is, line );
-    istringstream ss(line);
-        
-    Patron p;
-    while( ss >> p )
-    {
-        //b.addPatron(p);
-        cout << p;
-    }
-    
-    /*
-    
-    if (is.peek() == '\n') { cout << "here1"; }
-    
-    is.ignore('\n');
-    
-    Patron p;
-    while ( ( is.peek() != '\n' ) && ( is >> p ) )
-    {
-        b.addPatron(p);
-    }
-    
-    string line3("");
-    getline( is, line3 );
-    
-    //is.ignore('\n');
-    
-    Transaction t;
-    while ( ( is.peek() != '\n' ) && ( is >> t ))
-    {
-        b.addTransaction(t);
-    }
-    
-}*/

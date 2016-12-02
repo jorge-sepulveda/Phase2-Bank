@@ -14,11 +14,10 @@ try{
     // Create the main bank object
     Bank bank;
     
-/*
     // Ask to load a previous bank file
     cout << endl << "Please enter a filename to load (or enter for none): ";
     
-     Get user input for filename
+    //Get user input for filename
     string filename("");
     string input_string("");
     std::getline(cin, input_string);
@@ -38,28 +37,25 @@ try{
             input_file >> bank;
 	    }
     }
-*/
-     // Instantiate a NEW Bank to defaults
-        
+    else // Instantiate a NEW Bank to defaults
+    {
         // asking which currency will be the default
-    cout << "Welcome to the bank! \nEnter the default currency to use (1=USD, 2=GBP, 3=EUR, 4=JPY, 5=RUB): ";
-    int chosen_int;
-    cin >> chosen_int;
-    Symbol chosen_sym = static_cast<Symbol>(chosen_int);
+        cout << "Welcome to the bank! \nEnter the default currency to use (1=USD, 2=GBP, 3=EUR, 4=JPY, 5=RUB): ";
+        int chosen_int;
+        cin >> chosen_int;
+        Symbol chosen_sym = static_cast<Symbol>(chosen_int);
         
-    if (!cin)
-    {
-        cout << "Not a valid option, bank will default to USD";
-    }
-    else
-    {
-        bank.setDefaultSymbol( chosen_sym );
-    }
+        if (!cin) // if invalid currency choice
+        {
+            cout << "Not a valid option, bank will default to USD";
+        }else{
+            bank.setDefaultSymbol( chosen_sym );
+        }
         
         // Initialize bank money. Bank always stores money in USD.
         Money m( Symbol::USD, 100000.00);
         bank.setMoney( m );
-    
+    }
     
     // Menu loops until option 'K' is selected to quit the program
     while (true)

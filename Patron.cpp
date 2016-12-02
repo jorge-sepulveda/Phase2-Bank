@@ -41,14 +41,16 @@ istream& operator>>(istream& is, Patron& pp )
 	int account_num;
 	double balance;
 	
-	cout << " -------- ";
-	cout << name <<endl ;
-	cout << account_num << endl;
-	cout << balance << endl;
-	cout << " -------- ";
-	
+	// Read in space delimited data and populate variables
 	is >> name >> account_num >> balance;
+	
+	// If there were any errors on input, then return without constructing
+	if (!is) return is;
+	
+	// Construct the object using data
 	pp = Patron( name, account_num, balance);
+	
+	return is; // always return the istream
 }
 
 istream& operator>>(istream& is, Transaction& tt)
@@ -60,9 +62,16 @@ istream& operator>>(istream& is, Transaction& tt)
 	double amount;
 	
 	is >> pp >> t >> date >> time >> amount;
+	
+	// If there were any errors on input, then return without constructing
+	if (!is) return is;
+	
+	// Construct the object using data
 	tt = Transaction(pp,t,amount);
 	tt.date = date;
 	tt.time = time;
+	
+	return is; // always return the istream
 }
 
 ostream& operator<<(ostream&os, const Patron& p)
