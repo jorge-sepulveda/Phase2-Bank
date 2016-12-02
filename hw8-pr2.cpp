@@ -363,16 +363,6 @@ void Bank_window::next() {
   redraw();  // function inherited from Window to redraw the window
 }
 
-// -------------------------------
-
-// callback for when menu button is pressed - boilerplate
-
-void Bank_window::cb_menu(Address, Address pw)
-{  
-    reference_to<Bank_window>(pw).menu_pressed();
-    // menu_pressed defined in Bank_window class as part of declaration
-} 
-
 // ---------------------------------------------------
 //callback for when add Money(from the menu) is pressed - boilerplate
 void Bank_window::cb_addMoney(Address, Address pw)
