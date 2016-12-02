@@ -210,6 +210,8 @@ DLL_window::DLL_window(Point xy, int w, int h, const string& title) :
 
   // initialization - start by calling constructor of base class 
   Window(xy,w,h,title),    
+  
+  
 
   // initialize "Next curve" button
   next_button(
@@ -228,16 +230,18 @@ DLL_window::DLL_window(Point xy, int w, int h, const string& title) :
 	 Point(x_max()-330,0),       // location of box
 	 50, 20,                     // dimensions of box
 	 "coord x:"),                // label of box 
+	 
+	//inboxes and outboxes!!!!!!!!
+	usd_out(
+	 Point(0,30),
+	 60,20,
+	 "USD:"),
   // initialize the next_y inbox
   next_y(
 	 Point(x_max()-210,0),       // location of box
 	 50, 20,                     // dimensions of box
 	 "coord y:"),                // label of box
-  // initialize the outbox
-  xy_out(
-	 Point(100,0),               // location of box
-	 100, 20,                    // dimensions of box
-	 "coord (x,y):"),            // label of box
+
   // initialize the scalar_x inbox
   next_xx(
 	 Point(x_max()-330,30),      // location of box
@@ -273,7 +277,7 @@ DLL_window::DLL_window(Point xy, int w, int h, const string& title) :
   attach(quit_button);
   attach(next_x);
   attach(next_y);
-  attach(xy_out);
+  attach(usd_out);
   xy_out.put("no coord");        // output to out box
   attach(next_xx);
   attach(next_yx);
