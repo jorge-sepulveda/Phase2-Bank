@@ -5,7 +5,6 @@
 
 using namespace Graph_lib;
 
-
 //-----------------------------------------------------------
 // define a struct that is a window in which a DLL Curve can
 // be entered via a GUI
@@ -58,25 +57,42 @@ private:
     //dll.set_color(c);
   }
 
+  void hide_menu() {     
+    // hides the color menu and shows the button to display the color menu
+    bank_menu.hide(); 
+    menu_button.show(); 
+  }
+
   // actions invoked by callbacks:
+
+  void menu_pressed() {
+    // when menu button is pressed, hide the menu button and show the 
+    // actual menu of colors
+    menu_button.hide();    
+    bank_menu.show();
+  }
+
   void next();   // defined below
 
   void quit();   // defined below
   
   //----------------------------------------------------------------------------
-  // Callback Functions (Actions)
+  // Callback Functions
   //----------------------------------------------------------------------------
   
   void addMoney_pressed(){
     cout << "add Money!" << endl;
     output_1.put("add/ cur, amt");
+
   }
   void remMoney_pressed(){
     cout << "remove Money" << endl;
     output_1.put("rem/ cur, amt");
+
   }
   void showMoney_pressed(){
     cout << "show me the money" << endl;
+
   }
   void addPatron_pressed(){
     cout << "add a patron" << endl;
@@ -116,6 +132,7 @@ private:
   static void cb_red(Address, Address);
   static void cb_blue(Address, Address);
   static void cb_black(Address, Address);
+  static void cb_menu(Address, Address);
   static void cb_next(Address, Address);
   static void cb_quit(Address, Address);
   
@@ -256,8 +273,13 @@ Bank_window::Bank_window(Point xy, int w, int h, const string& title) :
        Point(x_max()-150,30),   // location of menu
        150, 20,                 // dimensions of menu
        Menu::vertical,         // list menu items vertically
-       "bank menu")               // label of menu 
-
+       "bank menu"),               // label of menu 
+  // initialize the menu button
+  menu_button(
+        Point(x_max()-150,30),  // location of menu button
+        150, 20,                // dimensions of button 
+        "menu",                // label of button
+        cb_menu)               // callback for button
 
   // body of constructor follows
 {
@@ -287,6 +309,7 @@ Bank_window::Bank_window(Point xy, int w, int h, const string& title) :
   attach(next_button);
   attach(quit_button);
 
+
   // First make 3 buttons for color menu, one for each color, and 
   // attach them to the menu: the attach function of the Menu struct
   // adjusts the size and location of the buttons; note callback functions).
@@ -304,7 +327,7 @@ Bank_window::Bank_window(Point xy, int w, int h, const string& title) :
   bank_menu.attach(new Button(Point(0,0),0,0,"Transactions",cb_Transactions));
   bank_menu.attach(new Button(Point(0,0),0,0,"Transfer",cb_transfer));
   attach(bank_menu);
-  //bank_menu.hide(); 
+  bank_menu.hide(); 
 
   // attach menu button
   attach(menu_button);
@@ -356,6 +379,16 @@ void Bank_window::next() {
 
   redraw();  // function inherited from Window to redraw the window
 }
+
+// -------------------------------
+
+// callback for when menu button is pressed - boilerplate
+
+void Bank_window::cb_menu(Address, Address pw)
+{  
+    reference_to<Bank_window>(pw).menu_pressed();
+    // menu_pressed defined in Bank_window class as part of declaration
+} 
 
 // ---------------------------------------------------
 //callback for when add Money(from the menu) is pressed - boilerplate
