@@ -6,7 +6,7 @@
 #include "Money.h"
 #include "Patron.h"
 #include "Bank.h"
-
+#include "BankGui.h"
 
 int main()
 {

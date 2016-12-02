@@ -50,7 +50,7 @@ private:
   Out_box output_5;
   Out_box output_6;
   
-  Multiline_out_box bigBox;
+  Multiline_out_box bbox;
   // function members
 
   void change(Color c) {             // change the color of the DLL
@@ -82,6 +82,7 @@ private:
   
   void addMoney_pressed(){
     cout << "add Money!" << endl;
+    bbox.put("addMoney!");
     output_1.put("add/ cur, amt");
 
   }
@@ -327,7 +328,6 @@ Bank_window::Bank_window(Point xy, int w, int h, const string& title) :
   bank_menu.attach(new Button(Point(0,0),0,0,"Transactions",cb_Transactions));
   bank_menu.attach(new Button(Point(0,0),0,0,"Transfer",cb_transfer));
   attach(bank_menu);
-  bank_menu.hide(); 
 
   // attach menu button
   attach(menu_button);
@@ -414,7 +414,6 @@ void Bank_window::cb_addPatron(Address, Address pw)
 {
     reference_to<Bank_window>(pw).addPatron_pressed();
 }
-
 //-------------------------------------------------------------------
 //callback for when is Patron(from the menu) is pressed - boilerplate
 void Bank_window::cb_isPatron(Address, Address pw)
@@ -459,6 +458,7 @@ void Bank_window::cb_transfer(Address, Address pw)
 }
 //-------------------------------------------------------------------
 // main - just creates window and invokes gui_main
+
 
 int main() 
   try {
