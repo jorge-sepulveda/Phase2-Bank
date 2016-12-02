@@ -123,7 +123,33 @@ private:
   Out_box xyx_out;                   // box for displaying last points removed
   Menu color_menu;                   // menu of color choices for the DLL
   Button menu_button;                // button to display the color menu
-
+  
+  //Additions for new inboxes and outboxes
+  Button bank_menu;
+  //out boxes for top bar of displaying all the monies.
+  Out_box usd_out;
+  Out_box gbp_out;
+  Out_box eur_out;
+  Out_box jpy_out;
+  Out_box rub_out;
+  Out_box all_out;
+  
+  //inboxes below the top bar
+  In_box input_1;
+  In_box input_2;
+  In_box input_3;
+  In_box input_4;
+  In_box input_5;
+  In_box input_6;
+  
+  //outboxes below the input boxes initializing
+  Out_box output_1;
+  Out_box output_2;
+  Out_box output_3;
+  Out_box output_4;
+  Out_box output_5;
+  Out_box output_6;
+  
   // function members
 
   void change(Color c) {             // change the color of the DLL
@@ -384,7 +410,7 @@ void DLL_window::cb_menu(Address, Address pw)
 int main() 
   try {
     // construct the GUI window
-    DLL_window win(Point(100,100),600,400,"HW8-PR2");
+    DLL_window win(Point(100,100),800,400,"Phase 2 bank");
     return gui_main();  // inherited from Window; calls FLTK's run
   }
   catch(exception& e) {
