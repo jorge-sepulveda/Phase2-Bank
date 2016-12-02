@@ -50,6 +50,8 @@ private:
   Out_box output_4;
   Out_box output_5;
   Out_box output_6;
+  
+  Out_box bigBox;
   // function members
 
   void change(Color c) {             // change the color of the DLL
@@ -64,21 +66,6 @@ private:
 
   // actions invoked by callbacks:
 
-  void red_pressed() {
-    change(Color::red);
-    hide_menu();        // once a color is chosen from the menu, hide the menu
-  }
-
-  void blue_pressed() {
-    change(Color::blue);
-    hide_menu();
-  }
-
-  void black_pressed() {
-    change(Color::black);
-    hide_menu();
-  }
-
   void menu_pressed() {
     // when menu button is pressed, hide the menu button and show the 
     // actual menu of colors
@@ -89,6 +76,43 @@ private:
   void next();   // defined below
 
   void quit();   // defined below
+  
+  void addMoney_pressed(){
+    cout << "add Money!" << endl;
+    hide_menu();
+  }
+  void remMoney_pressed(){
+    cout << "remove Money" << endl;
+    hide_menu();
+  }
+  void showMoney_pressed(){
+    cout << "show me the money" << endl;
+    hide_menu();
+  }
+  void addPatron_pressed(){
+    cout << "add a patron" << endl;
+  }
+  void isPatron_pressed(){
+    cout << "lookup a patron" << endl;
+  }
+  void patrons_pressed(){
+    cout << "patrons pressed" << endl;
+  }
+  void deposit_pressed(){
+    cout << "deposit to Patron pressed" <<endl;
+  }
+  void withdraw_pressed(){
+    cout << "withdraw from Patron pressed" << endl;
+  }
+  void overdrawn_pressed(){
+    cout << "overdrawn pressed" << endl;
+  }
+  void transactions_pressed(){
+    cout << "transactions pressed" << endl;
+  }
+  void transfer_pressed(){
+    cout << "transfer pressed" << endl;
+  }
 
   // callback functions; declared here and defined below.
 
@@ -98,6 +122,19 @@ private:
   static void cb_menu(Address, Address);
   static void cb_next(Address, Address);
   static void cb_quit(Address, Address);
+  
+  //adding callback voids for menu
+  static void cb_addMoney(Address,Address);
+  static void cb_remMoney(Address,Address);
+  static void cb_showMoney(Address,Address);
+  static void cb_addPatron(Address,Address);
+  static void cb_isPatron(Address,Address);
+  static void cb_Patrons(Address,Address);
+  static void cb_deposit(Address,Address);
+  static void cb_withdraw(Address,Address);
+  static void cb_overdrawn(Address,Address);
+  static void cb_Transactions(Address,Address);
+  static void cb_transfer(Address,Address);
 };
 
 // ----------------------------------------------------------
@@ -208,6 +245,10 @@ DLL_window::DLL_window(Point xy, int w, int h, const string& title) :
         Point(520,120),
         200,20,
         "O6:"),
+  bigBox(
+        Point(40,150),
+        680,350,
+        "L:"),
   // initialize the bank menu
   bank_menu(                        
        Point(x_max()-150,30),   // location of menu
@@ -244,6 +285,8 @@ DLL_window::DLL_window(Point xy, int w, int h, const string& title) :
   attach(output_4);
   attach(output_5);
   attach(output_6);
+  
+  attach(bigBox);
   attach(next_button);
   attach(quit_button);
 
@@ -254,9 +297,16 @@ DLL_window::DLL_window(Point xy, int w, int h, const string& title) :
   // Then attach menu to window but hide it (initially, the menu button
   // is displayed, not the actual menu of color choices).
 
-  bank_menu.attach(new Button(Point(0,0),0,0,"add money",cb_red)); 
-  bank_menu.attach(new Button(Point(0,0),0,0,"withdraw money",cb_blue));
-  bank_menu.attach(new Button(Point(0,0),0,0,"add Patron",cb_black));
+  bank_menu.attach(new Button(Point(0,0),0,0,"add money",cb_addMoney)); 
+  bank_menu.attach(new Button(Point(0,0),0,0,"remove money",cb_remMoney));
+  bank_menu.attach(new Button(Point(0,0),0,0,"add Patron",cb_showMoney));
+  bank_menu.attach(new Button(Point(0,0),0,0,"is?Patron",cb_isPatron));
+  bank_menu.attach(new Button(Point(0,0),0,0,"Patrons",cb_Patrons));
+  bank_menu.attach(new Button(Point(0,0),0,0,"Deposit",cb_deposit));
+  bank_menu.attach(new Button(Point(0,0),0,0,"withdraw",cb_withdraw));
+  bank_menu.attach(new Button(Point(0,0),0,0,"overdrawn",cb_overdrawn));
+  bank_menu.attach(new Button(Point(0,0),0,0,"Transactions",cb_Transactions));
+  bank_menu.attach(new Button(Point(0,0),0,0,"Transfer",cb_transfer));
   attach(bank_menu);
   bank_menu.hide(); 
 
@@ -312,30 +362,7 @@ void DLL_window::next() {
 }
 
 // -------------------------------
-// callback for when red button (part of color menu) is pressed - boilerplate
 
-void DLL_window::cb_red(Address, Address pw) {
-  reference_to<DLL_window>(pw).red_pressed();  
-  // red_pressed defined in DLL_window class as part of declaration
-}
-
-// -------------------------------
-// callback for when blue button (part of color menu) is pressed - boilerplate
-
-void DLL_window::cb_blue(Address, Address pw) {
-  reference_to<DLL_window>(pw).blue_pressed();  
-  // blue_pressed defined in DLL_window class as part of declaration
-}
-
-// -------------------------------
-// callback for when black button (part of color menu) is pressed - boilerplate
-
-void DLL_window::cb_black(Address, Address pw) {
-  reference_to<DLL_window>(pw).black_pressed();  
-  // black_pressed defined in DLL_window class as part of declaration
-}
-
-// -------------------------------
 // callback for when menu button is pressed - boilerplate
 
 void DLL_window::cb_menu(Address, Address pw)
@@ -345,6 +372,73 @@ void DLL_window::cb_menu(Address, Address pw)
 } 
 
 // ---------------------------------------------------
+//callback for when add Money(from the menu) is pressed - boilerplate
+void DLL_window::cb_addMoney(Address, Address pw)
+{
+    reference_to<DLL_window>(pw).addMoney_pressed();
+}
+//-------------------------------------------------------------------
+//callback for when remove Money(from the menu) is pressed - boilerplate
+void DLL_window::cb_remMoney(Address, Address pw)
+{
+    reference_to<DLL_window>(pw).remMoney_pressed();
+}
+//-------------------------------------------------------------------
+//callback for when show Money(from the menu) is pressed - boilerplate
+void DLL_window::cb_showMoney(Address, Address pw)
+{
+    reference_to<DLL_window>(pw).showMoney_pressed();
+}
+//-------------------------------------------------------------------
+//callback for when add Patron(from the menu) is pressed - boilerplate
+void DLL_window::cb_addPatron(Address, Address pw)
+{
+    reference_to<DLL_window>(pw).addPatron_pressed();
+}
+
+//-------------------------------------------------------------------
+//callback for when is Patron(from the menu) is pressed - boilerplate
+void DLL_window::cb_isPatron(Address, Address pw)
+{
+    reference_to<DLL_window>(pw).isPatron_pressed();
+}
+//-------------------------------------------------------------------
+//callback for when Patrons(from the menu) is pressed - boilerplate
+void DLL_window::cb_Patrons(Address, Address pw)
+{
+    reference_to<DLL_window>(pw).patrons_pressed();
+}
+//-------------------------------------------------------------------
+//callback for when deposit(from the menu) is pressed - boilerplate
+void DLL_window::cb_deposit(Address, Address pw)
+{
+    reference_to<DLL_window>(pw).deposit_pressed();
+}
+//-------------------------------------------------------------------
+//callback for when withdraw(from the menu) is pressed - boilerplate
+void DLL_window::cb_withdraw(Address, Address pw)
+{
+    reference_to<DLL_window>(pw).withdraw_pressed();
+}
+//-------------------------------------------------------------------
+//callback for when overdrawn(from the menu) is pressed - boilerplate
+void DLL_window::cb_overdrawn(Address, Address pw)
+{
+    reference_to<DLL_window>(pw).overdrawn_pressed();
+}
+//-------------------------------------------------------------------
+//callback for when Transactions(from the menu) is pressed - boilerplate
+void DLL_window::cb_Transactions(Address, Address pw)
+{
+    reference_to<DLL_window>(pw).transactions_pressed();
+}
+//-------------------------------------------------------------------
+//callback for when Transfer(from the menu) is pressed - boilerplate
+void DLL_window::cb_transfer(Address, Address pw)
+{
+    reference_to<DLL_window>(pw).transfer_pressed();
+}
+//-------------------------------------------------------------------
 // main - just creates window and invokes gui_main
 
 int main() 
