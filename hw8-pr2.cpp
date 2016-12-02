@@ -84,7 +84,6 @@ private:
     cout << "add Money!" << endl;
     bbox.put("addMoney!");
     output_1.put("add/ cur, amt");
-
   }
   void remMoney_pressed(){
     cout << "remove Money" << endl;
@@ -309,7 +308,6 @@ Bank_window::Bank_window(Point xy, int w, int h, const string& title) :
   attach(bbox);
   attach(next_button);
   attach(quit_button);
-
 
   // First make 3 buttons for color menu, one for each color, and 
   // attach them to the menu: the attach function of the Menu struct
