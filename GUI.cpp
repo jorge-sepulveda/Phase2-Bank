@@ -72,6 +72,15 @@ void Multiline_out_box::put(const string& s)
 }
 
 //------------------------------------------------------------------------------
+// Added by Dan to support multiline output
+
+void Multiline_out_box::attach(Window& win)
+{
+    pw = new Fl_Multiline_Output(loc.x, loc.y, width, height, label.c_str());
+    own = &win;
+}
+
+//------------------------------------------------------------------------------
 
 int Menu::attach(Button& b)
 {
