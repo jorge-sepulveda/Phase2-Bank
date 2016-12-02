@@ -7,6 +7,7 @@
 #include <FL/Fl.H>
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Output.H>
+#include <FL/Fl_Multiline_Output.H> //added by Dans to support multiline inputs
 #include "GUI.h"
 
 namespace Graph_lib {
@@ -60,6 +61,14 @@ void Out_box::attach(Window& win)
 {
     pw = new Fl_Output(loc.x, loc.y, width, height, label.c_str());
     own = &win;
+}
+
+//------------------------------------------------------------------------------
+// Added by Dan to support multiline output
+
+void Multiline_out_box::put(const string& s)
+{
+    reference_to<Fl_Multiline_Output>(pw).value(s.c_str());
 }
 
 //------------------------------------------------------------------------------

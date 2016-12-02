@@ -4,6 +4,8 @@
 // "Programming -- Principles and Practice Using C++" by Bjarne Stroustrup
 //
 
+#ifndef CHRONO_H
+
 #include "std_lib_facilities_4.h"
 // include the following to get current Date and Time
 #include <iomanip>
@@ -116,3 +118,5 @@ istream& operator>>(istream& is, Time& dd);
 //------------------------------------------------------------------------------
 
 } // Chrono
+
+#endif //CHRONO_H
