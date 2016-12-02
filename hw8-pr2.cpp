@@ -256,13 +256,8 @@ Bank_window::Bank_window(Point xy, int w, int h, const string& title) :
        Point(x_max()-150,30),   // location of menu
        150, 20,                 // dimensions of menu
        Menu::vertical,         // list menu items vertically
-       "bank menu"),               // label of menu 
-  // initialize the menu button
-  menu_button(
-        Point(x_max()-150,30),  // location of menu button
-        150, 20,                // dimensions of button 
-        "menu",                // label of button
-        cb_menu)               // callback for button
+       "bank menu")               // label of menu 
+
 
   // body of constructor follows
 {
