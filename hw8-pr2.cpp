@@ -116,7 +116,6 @@ private:
   static void cb_red(Address, Address);
   static void cb_blue(Address, Address);
   static void cb_black(Address, Address);
-  static void cb_menu(Address, Address);
   static void cb_next(Address, Address);
   static void cb_quit(Address, Address);
   
