@@ -59,8 +59,8 @@ private:
 
   void hide_menu() {     
     // hides the color menu and shows the button to display the color menu
-    bank_menu.hide(); 
-    menu_button.show(); 
+    //bank_menu.hide(); 
+    //menu_button.show(); 
   }
 
   // actions invoked by callbacks:
@@ -68,7 +68,7 @@ private:
   void menu_pressed() {
     // when menu button is pressed, hide the menu button and show the 
     // actual menu of colors
-    menu_button.hide();    
+    //menu_button.hide();    
     bank_menu.show();
   }
 
@@ -328,9 +328,9 @@ Bank_window::Bank_window(Point xy, int w, int h, const string& title) :
   bank_menu.attach(new Button(Point(0,0),0,0,"Transactions",cb_Transactions));
   bank_menu.attach(new Button(Point(0,0),0,0,"Transfer",cb_transfer));
   attach(bank_menu);
-
   // attach menu button
   attach(menu_button);
+  menu_button.hide(); 
 
   // attach shape that holds the DLL to be displayed
 }
