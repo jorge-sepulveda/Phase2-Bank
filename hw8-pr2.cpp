@@ -255,20 +255,7 @@ DLL_window::DLL_window(Point xy, int w, int h, const string& title) :
   xyx_out(
 	 Point(100,30),              // location of box
 	 100, 20,                    // dimensions of box
-	 "remove (x,y):"),           // label of box
-  // initialize the color menu
-  color_menu(                        
-	     Point(x_max()-70,30),   // location of menu
-	     70, 20,                 // dimensions of menu
-	     Menu::vertical,         // list menu items vertically
-	     "color"),               // label of menu 
-  // initialize the menu button
-  menu_button(
-	      Point(x_max()-80,30),  // location of menu button
-	      80, 20,                // dimensions of button 
-	      "color menu",          // label of button
-	      cb_menu)               // callback for button
-
+	 "remove (x,y):")           // label of box
   // body of constructor follows
 {
   // attach buttons and boxes to window
@@ -291,14 +278,6 @@ DLL_window::DLL_window(Point xy, int w, int h, const string& title) :
   // Then attach menu to window but hide it (initially, the menu button
   // is displayed, not the actual menu of color choices).
 
-  color_menu.attach(new Button(Point(0,0),0,0,"red",cb_red)); 
-  color_menu.attach(new Button(Point(0,0),0,0,"blue",cb_blue));
-  color_menu.attach(new Button(Point(0,0),0,0,"black",cb_black));
-  attach(color_menu);
-  color_menu.hide(); 
-
-  // attach menu button
-  attach(menu_button);
 
   // attach shape that holds the DLL to be displayed
   attach(dll);
