@@ -51,7 +51,7 @@ void Bank_window::runMenu( char option )
             
             
             stringstream ss;
-            ss << *bm->getAmount();
+            ss << bm->getAmount();
             
             usd_out.put(ss.str());
             /*cout << "New money in Bank: "
