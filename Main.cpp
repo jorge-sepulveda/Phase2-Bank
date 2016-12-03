@@ -355,7 +355,7 @@ void Bank_window::runMenu( char option )
             {
                 Transaction transaction = transactions->at(i);
     
-                ss << transaction << " " << transaction.amount*xRateFromTo(Symbol::USD, bank.getDefaultSymbol())) << "\n";
+                ss << transaction << " " << transaction.amount*xRateFromTo(Symbol::USD, bank.getDefaultSymbol()) << "\n";
             }
             bbox.put(ss.str());
             
