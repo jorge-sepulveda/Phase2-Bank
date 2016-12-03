@@ -125,7 +125,7 @@ void Bank_window::runMenu( char option )
                 bank.addPatron(patron);
                         
                 stringstream ss;
-                ss << patron << " " << patron->getBalance()*xRateFromTo(Symbol::USD, bank.getDefaultSymbol()) << "\n";;
+                ss << patron << " " << patron.getBalance()*xRateFromTo(Symbol::USD, bank.getDefaultSymbol()) << "\n";;
                 bbox.put(ss.str());
                 
                 ss.str(string());

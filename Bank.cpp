@@ -52,7 +52,7 @@ ostream& operator<<( ostream&os, Bank& b )
         
         Patron p = transaction.patron;
         
-        os << patron << " " << patron.getBalance() << " "
+        os << p << " " << p.getBalance() << " "
            << transaction << " "
            << transaction.amount;
         
