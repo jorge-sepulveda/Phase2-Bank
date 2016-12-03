@@ -362,6 +362,7 @@ void Bank_window::cb_quit(Address, Address pw) {
 // what to do when quit button is pressed
 
 void Bank_window::quit() {
+  runMenu('K');
   hide();                   // FLTK idiom for delete window
 }
 

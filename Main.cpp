@@ -460,10 +460,10 @@ int main()
 {
 try{
     Bank_window win_usd(Point(100,100),900,500,"USD");
-    Bank_window win_gbp(Point(110,110),900,500,"GBP");
-    Bank_window win_eur(Point(120,120),900,500,"EUR");
-    Bank_window win_jpy(Point(130,130),900,500,"JPY");
-    Bank_window win_rub(Point(140,140),900,500,"RUB");
+    Bank_window win_gbp(Point(125,125),900,500,"GBP");
+    Bank_window win_eur(Point(150,150),900,500,"EUR");
+    Bank_window win_jpy(Point(175,175),900,500,"JPY");
+    Bank_window win_rub(Point(200,200),900,500,"RUB");
 
     vector<Bank_window*> windows; // save a pointer to each bank window
 
