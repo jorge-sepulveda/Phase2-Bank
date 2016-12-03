@@ -415,7 +415,7 @@ try{
     
     
     // Ask to load a previous bank file
-    cout << endl << "Please enter a filename to load (or enter for none): ";
+    /*cout << endl << "Please enter a filename to load (or enter for none): ";
     
     //Get user input for filename
     string filename("");
@@ -455,9 +455,12 @@ try{
         // Initialize bank money. Bank always stores money in USD.
         Money m( Symbol::USD, 100000.00);
         bank.setMoney( m );
-    }
+    }*/
     
+    
+    Money m( Symbol::USD, 100000.00);
     Bank_window win(Point(100,100),900,500,"Bank Database");
+    win.bank.setMoney(m)
     
     return gui_main();  // inherited from Window; calls FLTK's run
 

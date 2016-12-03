@@ -69,13 +69,11 @@ string SymbolToStr( Symbol s )
 
 Symbol StrToSymbol( string s ) 
 {
-	switch( s ){
-		case "U" : return Symbol::USD; break;
-		case "G" : return Symbol::GBP; break;
-		case "E" : return Symbol::EUR; break;
-		case "J" : return Symbol::JPY; break;
-		case "R" : return Symbol::RUB; break;
-	}
+	if( s == "U") return Symbol::USD;
+	if( s == "G") return Symbol::GBP;
+	if( s == "E") return Symbol::EUR;
+	if( s == "J") return Symbol::JPY;
+	if( s == "R") return Symbol::RUB;
 }
 
 istream& operator>>(istream& is, Money& mm)
