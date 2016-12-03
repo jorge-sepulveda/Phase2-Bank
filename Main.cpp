@@ -230,7 +230,7 @@ void Bank_window::runMenu( char option )
         {
             //Edited to work with bank class.
             //display all Patrons using a for loop.
-            cout << "Displaying all Patrons...\n";
+            //cout << "Displaying all Patrons...\n";
             
             vector<Patron>* patrons = bank.getPatrons();
             
@@ -252,37 +252,37 @@ void Bank_window::runMenu( char option )
         //--------------------------------------------------------------
         case 'G':
         {
-            cout << "Making a patron deposit...\n";
-            
-            cout << "Enter Patron's account number: ";
+            //cout << "Making a patron deposit...\n";
+            input_1.put("depP/ act, cur, amt");
             int accountNumber;
-            cin >> accountNumber;
+            accountNumber = input_2.get_int();
             
             Patron* patron = bank.findPatronByAcctNum( accountNumber );
             
             if( patron == nullptr )
             {
-                cout << "A patron was not found with that account number, exiting deposit...\n";
+                bbox.put("patron not found");
             }else{
                 
-                cout << "Make a patron deposit in which currency? (1=USD, 2=GBP, 3=EUR, 4=JPY, 5=RUB): ";
-                int chosen_int;
-                cin >> chosen_int;
-                Symbol chosen_sym = static_cast<Symbol>(chosen_int);
+                string inboxcur =  input_3.get_string();
+                Symbol chosen_sym = StrToSymbol( inboxcur );
                 
-                cout << "Enter an amount for the deposit (non-negative number): ";
-                double deposit_amount;
-                cin >> deposit_amount;
+                double amount = stod ( input_4 );
                 
-                deposit_amount *= xRateFromTo( chosen_sym, Symbol::USD);
+                amount *= xRateFromTo( chosen_sym, Symbol::USD);
                 
-                patron->depositToPatron( deposit_amount );
+                patron->depositToPatron( amount );
                 
                 // Also add paton's  deposit to Bank money
                 Money* bm = bank.getMoney();
-                bm->add_money( deposit_amount );
+                bm->add_money( amount );
+                
+                stringstream ss;
+                ss << fixed << setprecision(2)<< m->getAmount();
+                usd_out(ss.str());
                 
                 bank.addTransaction( Transaction( *patron, "deposit", deposit_amount) );
+                bbox.put("deposit successful");
             }
             
             break;
@@ -293,44 +293,49 @@ void Bank_window::runMenu( char option )
         //--------------------------------------------------------------
         case 'H': 
         {
-            cout << "Making a patron withdrawl...\n";
+            input_1.put("wtdP/ act, cur, amt");
+            //cout << "Making a patron withdrawl...\n";
             
-            cout << "Enter patron account number: ";
+            //cout << "Enter patron account number: ";
             int accountNumber;
-            cin >> accountNumber;
+            accountNumber = input_2.get_int();
+            //cin >> accountNumber;
             
             Patron* patron = bank.findPatronByAcctNum( accountNumber );
             
             if( patron == nullptr )
             {
-                cout << "A patron was not found with that account number, exiting deposit...\n";
+                output_1.put("patron not found");
             }else{
+                
+                string inboxcur =  input_3.get_string();
+                Symbol chosen_sym = StrToSymbol( inboxcur );
             
-                cout << "Specify withdrawl currency type (1=USD, 2=GBP, 3=EUR, 4=JPY, 5=RUB): ";
-                int chosen_int;
-                cin >> chosen_int;
-                Symbol chosen_sym = static_cast<Symbol>(chosen_int);
                 
-                cout << "Enter withdrawl amount (non-negative number): ";
-                double withdrawl_amount;
-                cin >> withdrawl_amount;
+                double amount = stod ( input_4 );
                 
-                withdrawl_amount *= xRateFromTo( chosen_sym, Symbol::USD);
+                amount *= xRateFromTo( chosen_sym, Symbol::USD);
                 
                 Money* bm = bank.getMoney();
                 
-                if( withdrawl_amount > bm->getAmount() )
+                if( amount > bm->getAmount() )
                 {
-                    cout << "Warning: Bank cannot be overdrawn, cancelling withdrawal.\n";
+                    output_1.put("Bank cannot be overdrawn");
+                    output_2.put("cancelling withdrawal");
                 }else{
                     
-                    patron->withdrawFromPatron( withdrawl_amount );
-                    bm->withdraw_money( withdrawl_amount );
+                    patron->withdrawFromPatron( amount );
+                    bm->withdraw_money( amount );
                     
                     if( patron->getBalance() < 0)
                     {
-                        cout << "Warning: Patron account is now overdrawn.";
+                        output_3.put("patron overdrawn");
                     }
+                    
+                    stringstream ss;
+                    ss << fixed << setprecision(2)<< m->getAmount();
+                    usd_out(ss.str());
+                    bbox.put("withdrawal successful");
                     
                     bank.addTransaction( Transaction( *patron, "withdrawal", withdrawl_amount) );
                 }
