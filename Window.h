@@ -39,6 +39,7 @@ namespace Graph_lib
         void resize(int ww, int hh) { w=ww, h=hh; size(ww,hh); }
 
         void set_label(const string& s) { copy_label(s.c_str()); }
+        string get_label( ) { return title; } 
 
         void attach(Shape& s) { shapes.push_back(&s); }
         void attach(Widget&);
