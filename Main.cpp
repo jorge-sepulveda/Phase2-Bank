@@ -267,7 +267,7 @@ void Bank_window::runMenu( char option )
                 string inboxcur =  input_3.get_string();
                 Symbol chosen_sym = StrToSymbol( inboxcur );
                 
-                double amount = stod ( input_4.get_string );
+                double amount = stod ( input_4.get_string() );
                 
                 amount *= xRateFromTo( chosen_sym, Symbol::USD);
                 
