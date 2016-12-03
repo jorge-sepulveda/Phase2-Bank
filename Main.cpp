@@ -513,20 +513,20 @@ try{
         if( good_read == false ) // Instantiate a NEW Bank to defaults
         {
             // Initialize bank money. Bank always stores money in USD.
-            Money m( Symbol::USD, 100000.00*xRateFromTo(Symbol::USD,static_cast<Symbol>(i) ) );
+            bank.setDefaultSymbol( static_cast<Symbol>(i) );
+            Money m( Symbol::USD, 100000.00 );
             bank.setMoney( m );
-            
         }
 
         windows[i-1]->bank = bank;
         Money* m = bank.getMoney();
         double amount = m->getAmount();
         
-        windows[i-1]->usd_out.put(to_string( amount*xRateFromTo(static_cast<Symbol>(i),Symbol::USD)));
-        windows[i-1]->gbp_out.put(to_string( amount*xRateFromTo(static_cast<Symbol>(i),Symbol::GBP)));
-        windows[i-1]->eur_out.put(to_string( amount*xRateFromTo(static_cast<Symbol>(i),Symbol::EUR)));
-        windows[i-1]->jpy_out.put(to_string( amount*xRateFromTo(static_cast<Symbol>(i),Symbol::JPY)));
-        windows[i-1]->rub_out.put(to_string( amount*xRateFromTo(static_cast<Symbol>(i),Symbol::RUB)));
+        windows[i-1]->usd_out.put(to_string( amount*xRateFromTo( Symbol::USD, Symbol::USD )));
+        windows[i-1]->gbp_out.put(to_string( amount*xRateFromTo( Symbol::USD, Symbol::GBP )));
+        windows[i-1]->eur_out.put(to_string( amount*xRateFromTo( Symbol::USD, Symbol::EUR )));
+        windows[i-1]->jpy_out.put(to_string( amount*xRateFromTo( Symbol::USD, Symbol::JPY )));
+        windows[i-1]->rub_out.put(to_string( amount*xRateFromTo( Symbol::USD, Symbol::RUB )));
     } //end for
     
     return gui_main();  // inherited from Window; calls FLTK's run
