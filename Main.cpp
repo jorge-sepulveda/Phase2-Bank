@@ -476,8 +476,6 @@ try{
     for( int i = 1; i<=5; i++ ) // cycle through the five banks
     {
         Bank bank;
-        string ss = to_string( m->getAmount() );
-        usd_out.put( ss );
 
         //convert i to USD, GBP, etc.
         string defaultSymbol = SymbolToStr( static_cast<Symbol>(i) );
@@ -524,11 +522,11 @@ try{
         Money* m = bank.getMoney();
         double amount = m->getAmount();
         
-        windows[i-1]->usd_out.put(to_string( amount*xRateFromTo(Symbol::USD,static_cast<Symbol>(i) ));
-        windows[i-1]->gbp_out.put(to_string( amount*xRateFromTo(Symbol::USD,static_cast<Symbol>(i) ));
-        windows[i-1]->eur_out.put(to_string( amount*xRateFromTo(Symbol::USD,static_cast<Symbol>(i) ));
-        windows[i-1]->jpy_out.put(to_string( amount*xRateFromTo(Symbol::USD,static_cast<Symbol>(i) ));
-        windows[i-1]->rub_out.put(to_string( amount*xRateFromTo(Symbol::USD,static_cast<Symbol>(i) ));
+        windows[i-1]->usd_out.put(to_string( amount*xRateFromTo(Symbol::USD,static_cast<Symbol>(i))));
+        windows[i-1]->gbp_out.put(to_string( amount*xRateFromTo(Symbol::USD,static_cast<Symbol>(i))));
+        windows[i-1]->eur_out.put(to_string( amount*xRateFromTo(Symbol::USD,static_cast<Symbol>(i))));
+        windows[i-1]->jpy_out.put(to_string( amount*xRateFromTo(Symbol::USD,static_cast<Symbol>(i))));
+        windows[i-1]->rub_out.put(to_string( amount*xRateFromTo(Symbol::USD,static_cast<Symbol>(i))));
     } //end for
     
     return gui_main();  // inherited from Window; calls FLTK's run
