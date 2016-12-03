@@ -358,7 +358,7 @@ void Bank_window::runMenu( char option )
                 Patron patron = transaction.patron;
     
                 ss  << patron << " " << patron.getBalance()*xRateFromTo(Symbol::USD, bank.getDefaultSymbol())
-                    << ""
+                    << " "
                     << transaction << " "
                     << transaction.amount*xRateFromTo(Symbol::USD, bank.getDefaultSymbol()) << "\n";
             }
