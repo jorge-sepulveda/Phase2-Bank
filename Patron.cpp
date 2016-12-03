@@ -88,5 +88,6 @@ ostream& operator<<(ostream&os, const Transaction& t)
 				<< t.patron << " "
 			 	<< t.type << " "
 			 	<< t.date << " " 
-			  	<< t.time << " ";
+			  	<< t.time; // << " "
+			  	//<< t.amount * xRateFromTo( Symbol::USD, Bank::getDefaultSymbol() );
 }

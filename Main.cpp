@@ -292,7 +292,7 @@ void Bank_window::runMenu( char option )
                     
                     ss.str(string());
                     
-                    bank.addTransaction( Transaction( *patron, "withdrawal", amount) );
+                    bank.addTransaction( Transaction( *patron, "withdrawal", amount*xRateFromTo(Symbol::USD, bank.getDefaultSymbol())) );
                     ss << *patron << " " << patron->getBalance()*xRateFromTo(Symbol::USD, bank.getDefaultSymbol()) << "\n";
                     bbox.put(ss.str());
                 }
@@ -355,7 +355,7 @@ void Bank_window::runMenu( char option )
             {
                 Transaction transaction = transactions->at(i);
     
-                ss << transaction << "\n";
+                ss << transaction << " " << transaction.amount*xRateFromTo(Symbol::USD, bank.getDefaultSymbol())) << "\n";
             }
             bbox.put(ss.str());
             

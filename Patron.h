@@ -46,6 +46,8 @@ struct Transaction
 	string type;
 	double amount; 
 	
+	double getAmount() { return amount; }
+	
 	Transaction(){};
 	
 	Transaction(Patron p, string t, double d)

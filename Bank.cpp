@@ -50,7 +50,7 @@ ostream& operator<<( ostream&os, Bank& b )
     {
         Transaction transaction = transactions->at(i);
         
-        os << transaction;
+        os << transaction << " " << transaction.amount ;
         
         if( i < transactions->size()-1 ){ os << " "; }
     }
