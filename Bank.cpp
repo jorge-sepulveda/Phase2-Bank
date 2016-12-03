@@ -3,9 +3,6 @@
 #include "Patron.h"
 #include "Bank.h"
 
-// Initialize static member variables
-Symbol Bank::defaultSymbol = Symbol::USD;
-
 // Return a Patron object with given account number
 Patron* Bank::findPatronByAcctNum( int acctNum )
 {
@@ -35,12 +32,11 @@ ostream& operator<<( ostream&os, Bank& b )
     // Output patrons
     vector<Patron>* patrons = b.getPatrons();
     
-    
     for (int i = 0; i < patrons->size(); i++)
     {
         Patron patron = patrons->at(i);
         
-        os << patron;
+        os << patron << " " << patron.getBalance();
         
         if( i < patrons->size()-1 ){ os << " "; }
     }
@@ -54,7 +50,7 @@ ostream& operator<<( ostream&os, Bank& b )
     {
         Transaction transaction = transactions->at(i);
         
-        os << transaction;
+        os << transaction << " " << transaction.getBalance();
         
         if( i < transactions->size()-1 ){ os << " "; }
     }

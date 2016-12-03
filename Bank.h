@@ -28,12 +28,12 @@ public:
 	void addTransaction( Transaction tt ){ transactions.push_back(tt); }
 	
 	// Symbol related
-	static Symbol getDefaultSymbol(){ return defaultSymbol; }
+	Symbol getDefaultSymbol(){ return defaultSymbol; }
 	void setDefaultSymbol( Symbol s ){ defaultSymbol = s; }
 	
 private:
 
-	static Symbol defaultSymbol;
+	Symbol defaultSymbol;
 	
 	Money money;
 	vector<Patron> patrons;

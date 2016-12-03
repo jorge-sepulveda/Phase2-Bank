@@ -78,8 +78,8 @@ ostream& operator<<(ostream&os, const Patron& p)
 {
 	return os 	<< fixed << setprecision(2)
 				<< p.getName() << " "
-				<< p.getAccountNumber() << " "
-				<< p.getBalance() * xRateFromTo( Symbol::USD, Bank::getDefaultSymbol() );
+				<< p.getAccountNumber(); //<< " "
+				//<< p.getBalance() * xRateFromTo( Symbol::USD, Bank::getDefaultSymbol() );
 }
 				
 ostream& operator<<(ostream&os, const Transaction& t)
@@ -88,6 +88,5 @@ ostream& operator<<(ostream&os, const Transaction& t)
 				<< t.patron << " "
 			 	<< t.type << " "
 			 	<< t.date << " " 
-			  	<< t.time << " "
-			  	<< t.amount * xRateFromTo( Symbol::USD, Bank::getDefaultSymbol() );
+			  	<< t.time << " ";
 }

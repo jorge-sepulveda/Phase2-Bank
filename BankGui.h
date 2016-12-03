@@ -390,7 +390,7 @@ void Bank_window::next() {
   jpy_out.put(to_string( amount*xRateFromTo( Symbol::USD, Symbol::JPY )));
   rub_out.put(to_string( amount*xRateFromTo( Symbol::USD, Symbol::RUB )));
         
-  all_out.put(to_string( amount*xRateFromTo( Symbol::USD, Bank::getDefaultSymbol() )));
+  all_out.put(to_string( amount*xRateFromTo( Symbol::USD, bank.getDefaultSymbol() )));
   
   redraw();  // function inherited from Window to redraw the window
 }

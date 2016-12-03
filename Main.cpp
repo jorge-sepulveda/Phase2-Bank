@@ -23,28 +23,15 @@ void Bank_window::runMenu( char option )
         {
             bbox.put("addMoney!");
             input_1.put("add/ cur, amt");
-            //cout << "Adding money to Bank...\n";
-            
-            //cout << "Which currency are you adding? (1=USD, 2=GBP, 3=EUR, 4=JPY, 5=RUB): ";
             int chosen_int;
-            //cin >> chosen_int;
             string inbox1 =  input_2.get_string();
             Symbol chosen_sym = StrToSymbol( inbox1 );
             
             //get appropiate Money and add its money afterwards
-            //cout << "Enter the amount to add to the bank (nonnegative number): ";
+
             double add_amount = stod( input_3.get_string() );
-            //cin >> add_amount;
-            
-    
+
             Money *bm = bank.getMoney();
-            
-           // cout << fixed << setprecision(2);
-            
-            // [Default Symbol] [Amount in Default Symbol] [Inputting Symbol] [Amount in Inputting Symbol]
-            /*cout << "Old money in Bank: "
-                 << SymbolToStr( Bank::getDefaultSymbol() ) << " "  << bm->getAmount( Bank::getDefaultSymbol() ) << " "
-                 << "(" << SymbolToStr( chosen_sym ) << " "  << bm->getAmount( chosen_sym ) << ")" << "\n";*/
             
             add_amount *= xRateFromTo( chosen_sym, Symbol::USD );
             bm->add_money( add_amount );
@@ -54,10 +41,7 @@ void Bank_window::runMenu( char option )
             ss << fixed << setprecision(2)<< bm->getAmount();
             
             usd_out.put(ss.str());
-            /*cout << "New money in Bank: "
-                 << SymbolToStr( Bank::getDefaultSymbol() ) << " "  << bm->getAmount( Bank::getDefaultSymbol() ) << " "
-                 << "(" << SymbolToStr( chosen_sym ) << " "  << bm->getAmount( chosen_sym ) << ")" << "\n";*/
-            
+        
             break;
         }
         //--------------------------------------------------------------
@@ -69,28 +53,14 @@ void Bank_window::runMenu( char option )
             bbox.put("remove money");
             input_1.put("rem/ cur, amt");
             
-            //cout << "Which currency are you withdrawling? (1=USD, 2=GBP, 3=EUR, 4=JPY, 5=RUB): ";
-            /*int chosen_int;
-            cin >> chosen_int;
-            Symbol chosen_sym = static_cast<Symbol>(chosen_int);*/
-            
             string inbox1 = input_2.get_string();
             Symbol chosen_sym = StrToSymbol( inbox1 );
             
-            //get appropiate Money and add its money afterwards
-            //cout << "Enter the amount to withdrawl from the bank (nonnegative number): ";
-            //cin >> withdrawl_amount;
-            
+
             double remove_amount = stod( input_3.get_string() );
     
             Money *bm = bank.getMoney();
-            
-            //cout << fixed << setprecision(2);
-            
-            // [Default Symbol] [Amount in Default Symbol] [Inputting Symbol] [Amount in Inputting Symbol]
-            /*cout << "Old money in Bank: "
-                 << SymbolToStr( Bank::getDefaultSymbol() ) << " "  << bm->getAmount( Bank::getDefaultSymbol() ) << " "
-                 << "(" << SymbolToStr( chosen_sym ) << " "  << bm->getAmount( chosen_sym ) << ")" << "\n";*/
+
             
             remove_amount *= xRateFromTo( chosen_sym, Symbol::USD);
             bm->withdraw_money( remove_amount );
@@ -99,9 +69,7 @@ void Bank_window::runMenu( char option )
             ss << fixed << setprecision(2)<< bm->getAmount();
             
             usd_out.put(ss.str());
-            /*cout << "New money in Bank: "
-                 << SymbolToStr( Bank::getDefaultSymbol() ) << " "  << bm->getAmount( Bank::getDefaultSymbol() ) << " "
-                 << "(" << SymbolToStr( chosen_sym ) << " "  << bm->getAmount( chosen_sym ) << ")" << "\n";*/
+
             break;
         }
         //--------------------------------------------------------------
@@ -147,11 +115,6 @@ void Bank_window::runMenu( char option )
             balance = stod( input_5.get_string() );
             
             
-            
-            //cout << "Enter your name in the format 'First_Last': ";
-            //cin >> name;
-            
-            
                 
             if ( bank.findPatronByAcctNum( accountNumber ) == nullptr )
             {
@@ -178,15 +141,6 @@ void Bank_window::runMenu( char option )
             }
             
             
-            //cout << "Specify the currency type for starting balance (1=USD, 2=GBP, 3=EUR, 4=JPY, 5=RUB): ";
-            //int chosen_int;
-            //cin >> chosen_int;
-           // Symbol chosen_sym = static_cast<Symbol>(chosen_int);
-                
-            //cout << "Enter the starting balance (has to be > than 0): ";
-            //cin >> balance;
-            
-            
             
             break;
         }
@@ -209,7 +163,7 @@ void Bank_window::runMenu( char option )
             
             if( p != nullptr )
             {
-                ss << *p << "\n";
+                ss << *p << " " << p->getBalance() << "\n";
                 bbox.put(ss.str());
             }else{
                 output_1.put("account not found");
@@ -236,7 +190,7 @@ void Bank_window::runMenu( char option )
             {
                 Patron patron = patrons->at(i);
                 
-                ss << patron << "\n";
+                ss << patron << " " << patron.getBalance()*xRateFromTo(Symbol::USD, bank.getDefaultSymbol())<< "\n";
             }
             bbox.put(ss.str());
             
@@ -280,7 +234,7 @@ void Bank_window::runMenu( char option )
                 ss.str(string());
                 
                 bank.addTransaction( Transaction( *patron, "deposit", amount) );
-                ss << *patron;
+                ss << *patron << " " << patron->getBalance()*xRateFromTo(Symbol::USD, bank.getDefaultSymbol()) << "\n";
                 bbox.put(ss.str());
             }
             
@@ -339,7 +293,7 @@ void Bank_window::runMenu( char option )
                     ss.str(string());
                     
                     bank.addTransaction( Transaction( *patron, "withdrawal", amount) );
-                    ss << *patron;
+                    ss << *patron << " " << patron->getBalance()*xRateFromTo(Symbol::USD, bank.getDefaultSymbol()) << "\n";
                     bbox.put(ss.str());
                 }
             }
@@ -367,7 +321,7 @@ void Bank_window::runMenu( char option )
                 {
                     Patron patron = patrons->at(i);
                     
-                    ss << patron << "\n";
+                    ss << patron << " " << patron.getBalance() << "\n";
                     
                     none_overdrawn = false;
                 }
