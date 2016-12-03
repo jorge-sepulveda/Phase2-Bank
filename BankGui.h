@@ -289,10 +289,10 @@ Bank_window::Bank_window(Point xy, int w, int h, const string& title) :
   // body of constructor follows
 {
   // attach buttons and boxes to window
-  Money *bm = bank.getMoney();
+  /*Money *bm = bank.getMoney();
   stringstream ss;
   ss << bm->getAmount();
-  usd_out.put( ss.str() );
+  usd_out.put( ss.str() );*/
   
   
   attach(usd_out);
@@ -316,8 +316,6 @@ Bank_window::Bank_window(Point xy, int w, int h, const string& title) :
   attach(output_5);
   attach(output_6);
   
-  
-    
   attach(bbox);
   attach(next_button);
   attach(quit_button);

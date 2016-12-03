@@ -65,33 +65,39 @@ void Bank_window::runMenu( char option )
         //--------------------------------------------------------------
         case 'B':
         {
-            cout << "Withdrawing money from Bank...\n";
+            //cout << "Withdrawing money from Bank...\n";
+            bbox.put("remove money")
             
-            cout << "Which currency are you withdrawling? (1=USD, 2=GBP, 3=EUR, 4=JPY, 5=RUB): ";
-            int chosen_int;
+            //cout << "Which currency are you withdrawling? (1=USD, 2=GBP, 3=EUR, 4=JPY, 5=RUB): ";
+            /*int chosen_int;
             cin >> chosen_int;
-            Symbol chosen_sym = static_cast<Symbol>(chosen_int);
+            Symbol chosen_sym = static_cast<Symbol>(chosen_int);*/
+            
+            string inbox1 =  input_2.get_string();
+            Symbol chosen_sym = StrToSymbol( inbox1 );
             
             //get appropiate Money and add its money afterwards
             cout << "Enter the amount to withdrawl from the bank (nonnegative number): ";
             double withdrawl_amount;
             cin >> withdrawl_amount;
+            
+            double remove_amount = stod( input_3.get_string() );
     
             Money *bm = bank.getMoney();
             
-            cout << fixed << setprecision(2);
+            //cout << fixed << setprecision(2);
             
             // [Default Symbol] [Amount in Default Symbol] [Inputting Symbol] [Amount in Inputting Symbol]
-            cout << "Old money in Bank: "
+            /*cout << "Old money in Bank: "
                  << SymbolToStr( Bank::getDefaultSymbol() ) << " "  << bm->getAmount( Bank::getDefaultSymbol() ) << " "
-                 << "(" << SymbolToStr( chosen_sym ) << " "  << bm->getAmount( chosen_sym ) << ")" << "\n";
+                 << "(" << SymbolToStr( chosen_sym ) << " "  << bm->getAmount( chosen_sym ) << ")" << "\n";*/
             
             withdrawl_amount *= xRateFromTo( chosen_sym, Symbol::USD);
             bm->withdraw_money( withdrawl_amount );
             
-            cout << "New money in Bank: "
+            /*cout << "New money in Bank: "
                  << SymbolToStr( Bank::getDefaultSymbol() ) << " "  << bm->getAmount( Bank::getDefaultSymbol() ) << " "
-                 << "(" << SymbolToStr( chosen_sym ) << " "  << bm->getAmount( chosen_sym ) << ")" << "\n";
+                 << "(" << SymbolToStr( chosen_sym ) << " "  << bm->getAmount( chosen_sym ) << ")" << "\n";*/
             
             break;
         }
@@ -455,7 +461,6 @@ try{
         Money m( Symbol::USD, 100000.00);
         bank.setMoney( m );
     }*/
-    
     
     Money m( Symbol::USD, 100000.00);
     Bank_window win(Point(100,100),900,500,"Bank Database");
