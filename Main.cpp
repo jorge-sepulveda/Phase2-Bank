@@ -67,6 +67,7 @@ void Bank_window::runMenu( char option )
         {
             //cout << "Withdrawing money from Bank...\n";
             bbox.put("remove money");
+            output_1.put("rem/ cur, amt");
             
             //cout << "Which currency are you withdrawling? (1=USD, 2=GBP, 3=EUR, 4=JPY, 5=RUB): ";
             /*int chosen_int;
@@ -130,19 +131,30 @@ void Bank_window::runMenu( char option )
         //--------------------------------------------------------------
         case 'D':
         {
-            cout << "Creating a patron profile...\n";
+            //cout << "Creating a patron profile...\n";
+            
+            input_1.put("addP/ name, act, cur, amt");
             
             string name("");
             int accountNumber;
             double balance;
             
-            cout << "Enter your name in the format 'First_Last': ";
-            cin >> name;
+            string inboxcur =  input_4.get_string();
+            Symbol chosen_sym = StrToSymbol( inboxcur );
+            
+            name = input_2.get_string();
+            accountNumber = input_3.get_int();
+            balance = stod( input_5.get_string() );
+            
+            
+            
+            //cout << "Enter your name in the format 'First_Last': ";
+            //cin >> name;
             
             while(true) // loops until we break
             {
-                cout << "Enter a number between 1 and 9999 for your account number: ";
-                cin >> accountNumber;
+                //cout << "Enter a number between 1 and 9999 for your account number: ";
+                //cin >> accountNumber;
                 
                 if ( bank.findPatronByAcctNum( accountNumber ) == nullptr )
                 {
@@ -150,24 +162,35 @@ void Bank_window::runMenu( char option )
                     // it's ok to use this account number for new acct
                     break; 
                 }else{
-                    cout << "Account number already exists, try a different one.\n";
+                    output_1.put("Account already exists");
+                    output_2.put("try a different one");
                 }
             }
             
-            cout << "Specify the currency type for starting balance (1=USD, 2=GBP, 3=EUR, 4=JPY, 5=RUB): ";
-            int chosen_int;
-            cin >> chosen_int;
-            Symbol chosen_sym = static_cast<Symbol>(chosen_int);
+            //cout << "Specify the currency type for starting balance (1=USD, 2=GBP, 3=EUR, 4=JPY, 5=RUB): ";
+            //int chosen_int;
+            //cin >> chosen_int;
+           // Symbol chosen_sym = static_cast<Symbol>(chosen_int);
                 
-            cout << "Enter the starting balance (has to be > than 0): ";
-            cin >> balance;
+            //cout << "Enter the starting balance (has to be > than 0): ";
+            //cin >> balance;
             balance *= xRateFromTo( chosen_sym, Symbol::USD);
             
             Patron patron(name, accountNumber, balance );
             bank.addPatron(patron);
             
+            stringstream ss;
+            ss << patron;
+            bbox.put(ss.str());
+
+            ss.str(string());
+            
             Money* m = bank.getMoney();
             m->add_money( balance );
+            
+            ss << m->getAmount();
+            usd_out.put(ss.str());
+            
             
             break;
         }
