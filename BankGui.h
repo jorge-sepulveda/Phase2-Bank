@@ -380,12 +380,18 @@ void Bank_window::next() {
   // get input data from the inboxes - x and y coordinates
   // of next curve
   runMenu(menuChoice);
-  // update current position & scalar readouts - make strings with the
-  // coordinate & scalar info and use the out boxes
-  stringstream ssx;
-  //ssx << '(' << xx << ',' << yx << ')';
-  //xyx_out.put(ssx.str());
-
+  
+  Money* m = bank.getMoney();
+  double amount = m->getAmount();
+  
+  usd_out.put(to_string( amount*xRateFromTo( Symbol::USD, Symbol::USD )));
+  gbp_out.put(to_string( amount*xRateFromTo( Symbol::USD, Symbol::GBP )));
+  eur_out.put(to_string( amount*xRateFromTo( Symbol::USD, Symbol::EUR )));
+  jpy_out.put(to_string( amount*xRateFromTo( Symbol::USD, Symbol::JPY )));
+  rub_out.put(to_string( amount*xRateFromTo( Symbol::USD, Symbol::RUB )));
+        
+  all_out.put(to_string( amount*xRateFromTo( Symbol::USD, static_cast<Symbol>(i) )));
+  
   redraw();  // function inherited from Window to redraw the window
 }
 
