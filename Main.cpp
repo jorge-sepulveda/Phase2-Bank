@@ -527,6 +527,8 @@ try{
         windows[i-1]->eur_out.put(to_string( amount*xRateFromTo( Symbol::USD, Symbol::EUR )));
         windows[i-1]->jpy_out.put(to_string( amount*xRateFromTo( Symbol::USD, Symbol::JPY )));
         windows[i-1]->rub_out.put(to_string( amount*xRateFromTo( Symbol::USD, Symbol::RUB )));
+        
+        windows[i-1]->all_out.put(to_string( amount*xRateFromTo( Symbol::USD, static_cast<Symbol>(i) )));
     } //end for
     
     return gui_main();  // inherited from Window; calls FLTK's run
