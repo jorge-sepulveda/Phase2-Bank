@@ -85,7 +85,6 @@ ostream& operator<<(ostream&os, const Patron& p)
 ostream& operator<<(ostream&os, const Transaction& t)
 {
 	return os 	<< fixed << setprecision(2)
-				<< t.patron << " "
 			 	<< t.type << " "
 			 	<< t.date << " " 
 			  	<< t.time; // << " "

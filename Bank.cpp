@@ -50,7 +50,11 @@ ostream& operator<<( ostream&os, Bank& b )
     {
         Transaction transaction = transactions->at(i);
         
-        os << transaction << " " << transaction.amount ;
+        Patron p = transaction.patron;
+        
+        os << patron << " " << patron.getBalance() << " "
+           << transaction << " "
+           << transaction.amount;
         
         if( i < transactions->size()-1 ){ os << " "; }
     }

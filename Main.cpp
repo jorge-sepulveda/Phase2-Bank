@@ -125,11 +125,11 @@ void Bank_window::runMenu( char option )
                 bank.addPatron(patron);
                         
                 stringstream ss;
-                ss << patron;
+                ss << patron << " " << patron->getBalance()*xRateFromTo(Symbol::USD, bank.getDefaultSymbol()) << "\n";;
                 bbox.put(ss.str());
-            
+                
                 ss.str(string());
-                        
+                
                 Money* m = bank.getMoney();
                 m->add_money( balance );
                         
@@ -321,7 +321,7 @@ void Bank_window::runMenu( char option )
                 {
                     Patron patron = patrons->at(i);
                     
-                    ss << patron << " " << patron.getBalance() << "\n";
+                    ss << patron << " " << patron.getBalance()*xRateFromTo(Symbol::USD, bank.getDefaultSymbol()) << "\n";
                     
                     none_overdrawn = false;
                 }
@@ -354,8 +354,13 @@ void Bank_window::runMenu( char option )
             for( int i = 0; i < transactions->size(); i++ )
             {
                 Transaction transaction = transactions->at(i);
+                
+                Patron patron = transaction.patron;
     
-                ss << transaction << " " << transaction.amount*xRateFromTo(Symbol::USD, bank.getDefaultSymbol()) << "\n";
+                ss  << patron << " " << patron.getBalance()*xRateFromTo(Symbol::USD, bank.getDefaultSymbol())
+                    << ""
+                    << transaction << " "
+                    << transaction.amount*xRateFromTo(Symbol::USD, bank.getDefaultSymbol()) << "\n";
             }
             bbox.put(ss.str());
             
