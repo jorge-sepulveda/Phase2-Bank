@@ -48,8 +48,10 @@ void Bank_window::runMenu( char option )
             
             add_amount *= xRateFromTo( chosen_sym, Symbol::USD );
             bm->add_money( add_amount );
+            stringstream ss;
+            ss << *bm;
             
-            usd_out.put(*bm);
+            usd_out.put(ss.str());
             /*cout << "New money in Bank: "
                  << SymbolToStr( Bank::getDefaultSymbol() ) << " "  << bm->getAmount( Bank::getDefaultSymbol() ) << " "
                  << "(" << SymbolToStr( chosen_sym ) << " "  << bm->getAmount( chosen_sym ) << ")" << "\n";*/
