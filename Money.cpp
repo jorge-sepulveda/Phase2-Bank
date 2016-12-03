@@ -67,6 +67,17 @@ string SymbolToStr( Symbol s )
 	}
 }
 
+string StrToSymbol( string s ) 
+{
+	switch( s ){
+		case "U" : return Symbol::USD; break;
+		case "G" : return Symbol::GBP; break;
+		case "E" : return Symbol::EUR; break;
+		case "J" : return Symbol::JPY; break;
+		case "R" : return Symbol::RUB; break;
+	}
+}
+
 istream& operator>>(istream& is, Money& mm)
 {
 	int c;

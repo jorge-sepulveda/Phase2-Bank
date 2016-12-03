@@ -3,6 +3,11 @@
 #include "GUI.h"
 #include "Window.h"
 
+// declaration for the menu
+void runMenu( char option );
+
+char menuChoice='';
+
 using namespace Graph_lib;
 
 //-----------------------------------------------------------
@@ -81,50 +86,49 @@ private:
   //----------------------------------------------------------------------------
   
   void addMoney_pressed(){
-    cout << "add Money!" << endl;
-    bbox.put("addMoney!");
     output_1.put("add/ cur, amt");
+    menuChoice = 'A';
   }
   void remMoney_pressed(){
-    cout << "remove Money" << endl;
     output_1.put("rem/ cur, amt");
+    menuChoice = 'B';
 
   }
-  void showMoney_pressed(){
-    cout << "show me the money" << endl;
-
-  }
+  /*void showMoney_pressed(){
+    output_1.put("Money");
+    menuChoice = 'C';
+  }*/
   void addPatron_pressed(){
-    cout << "add a patron" << endl;
     output_1.put("addP/ name, act, cur, amt");
+    menuChoice = 'D';
   }
   void isPatron_pressed(){
-    cout << "lookup a patron" << endl;
     output_1.put("lookupP/ actnum");
+     menuChoice = 'E';
   }
   void patrons_pressed(){
-    cout << "patrons pressed" << endl;
     output_1.put("Patrons");
+     menuChoice = 'F';
   }
   void deposit_pressed(){
-    cout << "deposit to Patron pressed" <<endl;
     output_1.put("depP/ act, cur, amt");
+     menuChoice = 'G';
   }
   void withdraw_pressed(){
-    cout << "withdraw from Patron pressed" << endl;
     output_1.put("wtdP/ act, cur, amt");
+     menuChoice = 'H';
   }
   void overdrawn_pressed(){
-    cout << "overdrawn pressed" << endl;
     output_1.put("deadbeats");
+     menuChoice = 'I';
   }
   void transactions_pressed(){
-    cout << "transactions pressed" << endl;
     output_1.put("transactions");
+     menuChoice = 'J';
   }
   void transfer_pressed(){
-    cout << "transfer pressed" << endl;
     output_1.put("transfer/ bnk,cur,amt");
+     menuChoice = 'K';
   }
 
   // callback functions; declared here and defined below.
@@ -139,7 +143,7 @@ private:
   //adding callback voids for menu
   static void cb_addMoney(Address, Address);
   static void cb_remMoney(Address, Address);
-  static void cb_showMoney(Address, Address);
+  //static void cb_showMoney(Address, Address);
   static void cb_addPatron(Address, Address);
   static void cb_isPatron(Address ,Address);
   static void cb_Patrons(Address ,Address);
@@ -207,62 +211,62 @@ Bank_window::Bank_window(Point xy, int w, int h, const string& title) :
   input_1(
         Point(40,30),
         200,20,
-        "I1:"),
+        "In:"),
   //input 2 initialization
   input_2(
         Point(280,30),
         200,20,
-        "I2:"),
+        "I1:"),
   //input 3 initialization
   input_3(
         Point(520,30),
         200,20,
-        "I3:"),
+        "I2:"),
   //input 4 initialization
   input_4(
         Point(40,60),
         200,20,
-        "I4:"),
+        "I3:"),
   //input 5 initialization
   input_5(
         Point(280,60),
         200,20,
-        "I5:"),
+        "I4:"),
   //input 6 initialization
   input_6(
         Point(520,60),
         200,20,
-        "I6:"),
+        "I5:"),
   //outbox 1
   output_1(
         Point(40,90),
         200,20,
-        "O1:"),
+        "Out:"),
   //outbox 2 initialization
   output_2(
         Point(280,90),
         200,20,
-        "O2:"),
+        "O1:"),
   //outbox 3 initialization
   output_3(
         Point(520,90),
         200,20,
-        "O3:"),
+        "O2:"),
   //outbox 4 initialization
   output_4(
         Point(40,120),
         200,20,
-        "O4:"),
+        "O3:"),
   //outbox 5 initialization
   output_5(
         Point(280,120),
         200,20,
-        "O5:"),
+        "O4:"),
   //outbox 6 initialization
   output_6(
         Point(520,120),
         200,20,
-        "O6:"),
+        "O5:"),
   //big text box initializations.
   bbox(
         Point(40,150),
@@ -317,7 +321,7 @@ Bank_window::Bank_window(Point xy, int w, int h, const string& title) :
 
   bank_menu.attach(new Button(Point(0,0),0,0,"Add Money",cb_addMoney)); 
   bank_menu.attach(new Button(Point(0,0),0,0,"Remove Money",cb_remMoney));
-  bank_menu.attach(new Button(Point(0,0),0,0,"Add Patron",cb_showMoney));
+  bank_menu.attach(new Button(Point(0,0),0,0,"Add Patron",cb_addPatron()));
   bank_menu.attach(new Button(Point(0,0),0,0,"Patron Lookup",cb_isPatron));
   bank_menu.attach(new Button(Point(0,0),0,0,"Patron List",cb_Patrons));
   bank_menu.attach(new Button(Point(0,0),0,0,"Deposit",cb_deposit));
@@ -368,7 +372,7 @@ void Bank_window::cb_next(Address, Address pw) {
 void Bank_window::next() {
   // get input data from the inboxes - x and y coordinates
   // of next curve
-
+  runMenu(menuChoice);
   // update current position & scalar readouts - make strings with the
   // coordinate & scalar info and use the out boxes
   stringstream ssx;
@@ -402,10 +406,10 @@ void Bank_window::cb_remMoney(Address, Address pw)
 }
 //-------------------------------------------------------------------
 //callback for when show Money(from the menu) is pressed - boilerplate
-void Bank_window::cb_showMoney(Address, Address pw)
+/*void Bank_window::cb_showMoney(Address, Address pw)
 {
     reference_to<Bank_window>(pw).showMoney_pressed();
-}
+}*/
 //-------------------------------------------------------------------
 //callback for when add Patron(from the menu) is pressed - boilerplate
 void Bank_window::cb_addPatron(Address, Address pw)
@@ -454,21 +458,3 @@ void Bank_window::cb_transfer(Address, Address pw)
 {
     reference_to<Bank_window>(pw).transfer_pressed();
 }
-//-------------------------------------------------------------------
-// main - just creates window and invokes gui_main
-
-
-int main() 
-  try {
-    // construct the GUI window
-    Bank_window win(Point(100,100),900,500,"Bank phase 2 window");
-    return gui_main();  // inherited from Window; calls FLTK's run
-  }
-  catch(exception& e) {
-    cerr << "exception: " << e.what() << '\n';
-    return 1;
-  }
-  catch(...) {
-    cerr << "some exception\n";
-    return 2;
-  }
