@@ -51,7 +51,7 @@ void Bank_window::runMenu( char option )
             
             
             stringstream ss;
-            ss << bm->getAmount();
+            ss << fixed << setprecision(2)<< bm->getAmount();
             
             usd_out.put(ss.str());
             /*cout << "New money in Bank: "
@@ -96,7 +96,7 @@ void Bank_window::runMenu( char option )
             bm->withdraw_money( remove_amount );
             
             stringstream ss;
-            ss << bm->getAmount();
+            ss << fixed << setprecision(2)<< bm->getAmount();
             
             usd_out.put(ss.str());
             /*cout << "New money in Bank: "
@@ -188,7 +188,7 @@ void Bank_window::runMenu( char option )
             Money* m = bank.getMoney();
             m->add_money( balance );
             
-            ss << m->getAmount();
+            ss << fixed << setprecision(2)<< bm->getAmount();
             usd_out.put(ss.str());
             
             
@@ -200,20 +200,23 @@ void Bank_window::runMenu( char option )
         //--------------------------------------------------------------
         case 'E':
         {
-            cout << "Accessing patron database...\n";
-            cout << "Enter an account number you would like to look up: ";
+            //cout << "Accessing patron database...\n";
+            //cout << "Enter an account number you would like to look up: ";
             
             int acctNum;
-            cin >> acctNum; // get user input for Patron account number
+            acctNum = input_2.get_int();
+            //cin >> acctNum; // get user input for Patron account number
     
             Patron* p = bank.findPatronByAcctNum( acctNum );
             
+            stringstream ss;
+            
             if( p != nullptr )
             {
-                cout << *p;
+                ss << *p << "\n";
+                bbox.put(ss.str());
             }else{
-                cout << "An account was not found with that number, "
-                     << "exiting lookup...\n";
+                output_1.put("account not found");
             }
     
             break;
@@ -231,12 +234,15 @@ void Bank_window::runMenu( char option )
             
             vector<Patron>* patrons = bank.getPatrons();
             
+            stringstream ss;
+            
             for (int i = 0; i < patrons->size() ; i++)
             {
                 Patron patron = patrons->at(i);
                 
-                cout << patron << "\n";
+                ss << patron << "\n";
             }
+            bbox.put(ss.str())
             
             break;
         }
