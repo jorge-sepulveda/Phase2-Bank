@@ -312,7 +312,7 @@ void Bank_window::runMenu( char option )
                 Symbol chosen_sym = StrToSymbol( inboxcur );
             
                 
-                double amount = stod( input_4 );
+                double amount = stod( input_4.get_string() );
                 
                 amount *= xRateFromTo( chosen_sym, Symbol::USD);
                 
@@ -334,7 +334,7 @@ void Bank_window::runMenu( char option )
                     
                     stringstream ss;
                     ss << fixed << setprecision(2)<< bm->getAmount();
-                    usd_out(ss.str());
+                    usd_out.put(ss.str());
                     bbox.put("withdrawal successful");
                     
                     bank.addTransaction( Transaction( *patron, "withdrawal", amount) );
