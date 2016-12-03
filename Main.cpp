@@ -514,7 +514,7 @@ try{
         {
             // Initialize bank money. Bank always stores money in USD.
             bank.setDefaultSymbol( static_cast<Symbol>(i) );
-            Money m( Symbol::USD, 100000.00 );
+            Money m( Symbol::USD, 100000.00*xRateFromTo(Symbol::USD, static_cast<Symbol>(i) ) );
             bank.setMoney( m );
         }
 
