@@ -459,63 +459,70 @@ void Bank_window::runMenu( char option )
 int main()
 {
 try{
-    /*
-    // Create the main bank object
-    vector<Bank> banks;
-    
-    */
-    // Create the main bank object
-    
-    
-    // Ask to load a previous bank file
-    /*cout << endl << "Please enter a filename to load (or enter for none): ";
-    
-    //Get user input for filename
-    string filename("");
-    string input_string("");
-    std::getline(cin, input_string);
-    istringstream ss(input_string);
-    filename = ss.str();
-    
-    if( ss.good() && filename != "" ) // If user entered a filename
+    Bank_window win_usd(Point(100,100),900,500,"USD");
+    Bank_window win_gbp(Point(110,110),900,500,"GBP");
+    Bank_window win_eur(Point(120,120),900,500,"EUR");
+    Bank_window win_jpy(Point(130,130),900,500,"JPY");
+    Bank_window win_rub(Point(140,140),900,500,"RUB");
+
+    vector<Bank_window*> windows; // save a pointer to each bank window
+
+    windows.push_back( &win_usd );
+    windows.push_back( &win_gbp );
+    windows.push_back( &win_eur );
+    windows.push_back( &win_jpy );
+    windows.push_back( &win_rub );
+
+    for( int i = 1; i<=5; i++ ) // cycle through the five banks
     {
-        // Load the file
-        ifstream input_file(filename, ifstream::in);
-	
-	    if( !input_file.is_open() ){ //if the file can't be opened
-		    error("Error reading file...\n");
-	    }
-	    else{
-	        // Load the file into the main bank object
-            input_file >> bank;
-	    }
-    }
-    else // Instantiate a NEW Bank to defaults
-    {
-        // asking which currency will be the default
-        cout << "Welcome to the bank! \nEnter the default currency to use (1=USD, 2=GBP, 3=EUR, 4=JPY, 5=RUB): ";
-        int chosen_int;
-        cin >> chosen_int;
-        Symbol chosen_sym = static_cast<Symbol>(chosen_int);
-        
-        if (!cin) // if invalid currency choice
+        Bank bank;
+
+        //convert i to USD, GBP, etc.
+        string defaultSymbol = SymbolToStr( static_cast<Symbol>(i) );
+
+        // Ask to load a previous bank file
+        cout << endl << "Please enter a filename to load the " << defaultSymbol << " bank (or enter for none): ";
+
+        //Get user input for filename
+        string filename("");
+        string input_string("");
+        std::getline(cin, input_string);
+        istringstream ss(input_string);
+        filename = ss.str();
+
+        bool good_read = false;
+
+        if( ss.good() && filename != "" ) // If user entered a filename
         {
-            cout << "Not a valid option, bank will default to USD";
-        }else{
-            bank.setDefaultSymbol( chosen_sym );
+            // Load the file
+            ifstream input_file(filename, ifstream::in);
+    	
+    	    if( !input_file.is_open() ){ //if the file can't be opened
+    		    error("Error reading file...\n");
+    	    }
+    	    else{
+    	        // Load the file into the main bank object
+                if( input_file >> bank )
+                {
+                    //flag as good file read
+                    good_read = true;
+                }
+    	    }
         }
-        
-        // Initialize bank money. Bank always stores money in USD.
-        Money m( Symbol::USD, 100000.00);
-        bank.setMoney( m );
-    }*/
-    
-    Money m( Symbol::USD, 100000.00);
-    Bank_window win(Point(100,100),900,500,"Bank Database");
-    win.bank.setMoney(m);
+
+        if( good_read == false ) // Instantiate a NEW Bank to defaults
+        {
+            // Initialize bank money. Bank always stores money in USD.
+            Money m( Symbol::USD, 100000.00*xRateFromTo(Symbol::USD,static_cast<Symbol>(i) ) );
+            bank.setMoney( m );
+        }
+
+        windows[i-1]->bank = bank;
+
+    } //end for
     
     return gui_main();  // inherited from Window; calls FLTK's run
-
+    
 } //end try
 catch(exception& e)
 {
