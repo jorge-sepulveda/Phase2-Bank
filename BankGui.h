@@ -11,7 +11,7 @@ using namespace Graph_lib;
 // be entered via a GUI
 
 struct Bank_window : Graph_lib::Window {       // inherits from Window
-  
+  Bank bank;
   // constructor
   Bank_window(Point xy,             // top lefthand corner
          int w,                // width
@@ -20,7 +20,7 @@ struct Bank_window : Graph_lib::Window {       // inherits from Window
 
 private:
   // data members
-  Bank bank; // holds data for this window's bank
+   // holds data for this window's bank
   char menuChoice='x';
 
   // widgets:

@@ -383,7 +383,6 @@ void Bank_window::runMenu( char option )
             
             cout << "\n";
             
-            return 0;
             break;
         }
         //--------------------------------------------------------------
@@ -460,7 +459,7 @@ try{
     
     Money m( Symbol::USD, 100000.00);
     Bank_window win(Point(100,100),900,500,"Bank Database");
-    win.bank.setMoney(m)
+    win.bank.setMoney(m);
     
     return gui_main();  // inherited from Window; calls FLTK's run
 
