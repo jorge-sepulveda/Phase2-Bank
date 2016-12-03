@@ -77,7 +77,7 @@ void Bank_window::runMenu( char option )
             Symbol chosen_sym = StrToSymbol( inbox1 );
             
             //get appropiate Money and add its money afterwards
-            cout << "Enter the amount to withdrawl from the bank (nonnegative number): ";
+            //cout << "Enter the amount to withdrawl from the bank (nonnegative number): ";
             double withdrawl_amount;
             //cin >> withdrawl_amount;
             
@@ -95,6 +95,10 @@ void Bank_window::runMenu( char option )
             withdrawl_amount *= xRateFromTo( chosen_sym, Symbol::USD);
             bm->withdraw_money( withdrawl_amount );
             
+            stringstream ss;
+            ss << bm->getAmount();
+            
+            usd_out.put(ss.str());
             /*cout << "New money in Bank: "
                  << SymbolToStr( Bank::getDefaultSymbol() ) << " "  << bm->getAmount( Bank::getDefaultSymbol() ) << " "
                  << "(" << SymbolToStr( chosen_sym ) << " "  << bm->getAmount( chosen_sym ) << ")" << "\n";*/
