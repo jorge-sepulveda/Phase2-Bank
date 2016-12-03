@@ -22,7 +22,7 @@ void Bank_window::runMenu( char option )
         case 'A':
         {
             bbox.put("addMoney!");
-            output_1.put("add/ cur, amt");
+            input_1.put("add/ cur, amt");
             //cout << "Adding money to Bank...\n";
             
             //cout << "Which currency are you adding? (1=USD, 2=GBP, 3=EUR, 4=JPY, 5=RUB): ";
@@ -281,8 +281,11 @@ void Bank_window::runMenu( char option )
                 ss << fixed << setprecision(2)<< bm->getAmount();
                 usd_out.put(ss.str());
                 
+                ss.str(string());
+                
                 bank.addTransaction( Transaction( *patron, "deposit", amount) );
-                bbox.put("deposit successful");
+                ss << *patron;
+                bbox.put(ss);
             }
             
             break;
@@ -337,7 +340,11 @@ void Bank_window::runMenu( char option )
                     usd_out.put(ss.str());
                     bbox.put("withdrawal successful");
                     
+                    ss.str(string());
+                    
                     bank.addTransaction( Transaction( *patron, "withdrawal", amount) );
+                    ss << *patron;
+                    bbox.put(ss);
                 }
             }
             
@@ -350,19 +357,21 @@ void Bank_window::runMenu( char option )
         //--------------------------------------------------------------
         case 'I':
         {
-            cout << "Displaying overdrawn patrons...\n";
+            input_1.put("deadbeats");
             
             bool none_overdrawn = true;
             
             vector<Patron>* patrons = bank.getPatrons();
+            
+            stringstream ss;
             
             for (int i = 0; i < patrons->size(); i++)
             {
                 if( patrons->at(i).getBalance() < 0)
                 {
                     Patron patron = patrons->at(i);
-    
-                    cout << patron << "\n";
+                    
+                    ss << patron << "\n";
                     
                     none_overdrawn = false;
                 }
@@ -370,7 +379,11 @@ void Bank_window::runMenu( char option )
             
             if( none_overdrawn )
             {
-                cout << "No patrons are overdrawn\n";
+                output_1.put("none overdrawn");
+            }
+            else if ( !none_overdrawn )
+            {
+                bbox.put(ss.str());
             }
             
             break;
@@ -382,16 +395,19 @@ void Bank_window::runMenu( char option )
         //--------------------------------------------------------------.
         case 'J':
         {
-            cout << "Displaying all Transactions...\n";
+            input_1.put("transactions");
             
             vector<Transaction>* transactions = bank.getTransactions();
+            
+            stringstream ss;
             
             for( int i = 0; i < transactions->size(); i++ )
             {
                 Transaction transaction = transactions->at(i);
     
-                cout << transaction << "\n";
+                ss << transaction << "\n";
             }
+            bbox.put(ss.str());
             
             break;
         }
