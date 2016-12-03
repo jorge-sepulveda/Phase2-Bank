@@ -344,7 +344,7 @@ void Bank_window::runMenu( char option )
                     
                     bank.addTransaction( Transaction( *patron, "withdrawal", amount) );
                     ss << *patron;
-                    bbox.put(ss);
+                    bbox.put(ss.str());
                 }
             }
             
