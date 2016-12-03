@@ -67,7 +67,7 @@ void Bank_window::runMenu( char option )
         {
             //cout << "Withdrawing money from Bank...\n";
             bbox.put("remove money");
-            output_1.put("rem/ cur, amt");
+            input_1.put("rem/ cur, amt");
             
             //cout << "Which currency are you withdrawling? (1=USD, 2=GBP, 3=EUR, 4=JPY, 5=RUB): ";
             /*int chosen_int;
@@ -158,8 +158,23 @@ void Bank_window::runMenu( char option )
                 
                 if ( bank.findPatronByAcctNum( accountNumber ) == nullptr )
                 {
-                    // patron with account number not located,
-                    // it's ok to use this account number for new acct
+                    //number is ok for usage
+                    balance *= xRateFromTo( chosen_sym, Symbol::USD);
+            
+                    Patron patron(name, accountNumber, balance );
+                    bank.addPatron(patron);
+                    
+                    stringstream ss;
+                    ss << patron;
+                    bbox.put(ss.str());
+        
+                    ss.str(string());
+                    
+                    Money* m = bank.getMoney();
+                    m->add_money( balance );
+                    
+                    ss << fixed << setprecision(2)<< m->getAmount();
+                    usd_out.put(ss.str());
                     break; 
                 }else{
                     output_1.put("Account already exists");
@@ -174,22 +189,7 @@ void Bank_window::runMenu( char option )
                 
             //cout << "Enter the starting balance (has to be > than 0): ";
             //cin >> balance;
-            balance *= xRateFromTo( chosen_sym, Symbol::USD);
             
-            Patron patron(name, accountNumber, balance );
-            bank.addPatron(patron);
-            
-            stringstream ss;
-            ss << patron;
-            bbox.put(ss.str());
-
-            ss.str(string());
-            
-            Money* m = bank.getMoney();
-            m->add_money( balance );
-            
-            ss << fixed << setprecision(2)<< m->getAmount();
-            usd_out.put(ss.str());
             
             
             break;
