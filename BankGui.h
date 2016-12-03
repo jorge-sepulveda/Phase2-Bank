@@ -129,7 +129,7 @@ private:
   }
   void transfer_pressed(){
     input_1.put("transfer/ bnk,cur,amt");
-     menuChoice = 'K';
+     menuChoice = 'L';
   }
 
   // callback functions; declared here and defined below.
@@ -289,10 +289,9 @@ Bank_window::Bank_window(Point xy, int w, int h, const string& title) :
   // body of constructor follows
 {
   // attach buttons and boxes to window
-  /*Money *bm = bank.getMoney();
-  stringstream ss;
-  ss << bm->getAmount();
-  usd_out.put( ss.str() );*/
+  Money m = bank.getMoney();
+  string ss = to_string( m.getAmount() );
+  usd_out.put( ss );
   
   
   attach(usd_out);
