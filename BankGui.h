@@ -134,9 +134,6 @@ private:
 
   // callback functions; declared here and defined below.
 
-  static void cb_red(Address, Address);
-  static void cb_blue(Address, Address);
-  static void cb_black(Address, Address);
   static void cb_menu(Address, Address);
   static void cb_next(Address, Address);
   static void cb_quit(Address, Address);
@@ -289,9 +286,7 @@ Bank_window::Bank_window(Point xy, int w, int h, const string& title) :
   // body of constructor follows
 {
   // attach buttons and boxes to window
-  Money* m = bank.getMoney();
-  string ss = to_string( m->getAmount() );
-  usd_out.put( ss );
+  
   
   
   attach(usd_out);
@@ -318,6 +313,10 @@ Bank_window::Bank_window(Point xy, int w, int h, const string& title) :
   attach(bbox);
   attach(next_button);
   attach(quit_button);
+  
+  Money* m = bank.getMoney();
+  string ss = to_string( m->getAmount() );
+  usd_out.put( ss );
 
   // First make 3 buttons for color menu, one for each color, and 
   // attach them to the menu: the attach function of the Menu struct
