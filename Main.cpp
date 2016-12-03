@@ -78,7 +78,6 @@ void Bank_window::runMenu( char option )
             
             //get appropiate Money and add its money afterwards
             //cout << "Enter the amount to withdrawl from the bank (nonnegative number): ";
-            double withdrawl_amount;
             //cin >> withdrawl_amount;
             
             double remove_amount = stod( input_3.get_string() );
@@ -93,7 +92,7 @@ void Bank_window::runMenu( char option )
                  << "(" << SymbolToStr( chosen_sym ) << " "  << bm->getAmount( chosen_sym ) << ")" << "\n";*/
             
             withdrawl_amount *= xRateFromTo( chosen_sym, Symbol::USD);
-            bm->withdraw_money( withdrawl_amount );
+            bm->withdraw_money( remove_amount );
             
             stringstream ss;
             ss << bm->getAmount();
