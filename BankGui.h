@@ -289,7 +289,7 @@ Bank_window::Bank_window(Point xy, int w, int h, const string& title) :
 {
   // attach buttons and boxes to window
   
-  usd_out.put(bank.getMoney().getAmount());
+  usd_out.put(bank.getMoney()->getAmount());
   
   
   attach(usd_out);
