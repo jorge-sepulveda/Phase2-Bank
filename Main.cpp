@@ -8,9 +8,12 @@
 #include "Bank.h"
 #include "BankGui.h"
 
+Bank bank;
+
 void runMenu( char option )
 {
     // Evaluate the user's menu choice
+    
     switch (option)
     {
         //--------------------------------------------------------------
@@ -20,19 +23,19 @@ void runMenu( char option )
         //--------------------------------------------------------------
         case 'A':
         {
-            bbox.put("addMoney!");
-            output_1.put("add/ cur, amt");
+            Bank_window::bbox.put("addMoney!");
+            Bank_window::output_1.put("add/ cur, amt");
             //cout << "Adding money to Bank...\n";
             
             //cout << "Which currency are you adding? (1=USD, 2=GBP, 3=EUR, 4=JPY, 5=RUB): ";
             int chosen_int;
             //cin >> chosen_int;
-            string inbox1 = input_2.get_string();
-            Symbol chosen_sym = StrToSymbol( inbox1 );
+            string inbox1 =  Bank_window::input_2.get_string();
+            Symbol chosen_sym = Money::StrToSymbol( inbox1 );
             
             //get appropiate Money and add its money afterwards
             //cout << "Enter the amount to add to the bank (nonnegative number): ";
-            double add_amount = stod( input_3.get_string() );
+            double add_amount = stod( Bank_window::input_3.get_string() );
             //cin >> add_amount;
             
     
@@ -48,7 +51,7 @@ void runMenu( char option )
             add_amount *= xRateFromTo( chosen_sym, Symbol::USD );
             bm->add_money( add_amount );
             
-            usd_out.put(*bm);
+             Bank_window::usd_out.put(*bm);
             /*cout << "New money in Bank: "
                  << SymbolToStr( Bank::getDefaultSymbol() ) << " "  << bm->getAmount( Bank::getDefaultSymbol() ) << " "
                  << "(" << SymbolToStr( chosen_sym ) << " "  << bm->getAmount( chosen_sym ) << ")" << "\n";*/
@@ -407,7 +410,7 @@ try{
     
     */
     // Create the main bank object
-    Bank bank;
+    
     
     // Ask to load a previous bank file
     cout << endl << "Please enter a filename to load (or enter for none): ";
