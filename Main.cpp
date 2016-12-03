@@ -66,14 +66,14 @@ void Bank_window::runMenu( char option )
         case 'B':
         {
             //cout << "Withdrawing money from Bank...\n";
-            bbox.put("remove money")
+            bbox.put("remove money");
             
             //cout << "Which currency are you withdrawling? (1=USD, 2=GBP, 3=EUR, 4=JPY, 5=RUB): ";
             /*int chosen_int;
             cin >> chosen_int;
             Symbol chosen_sym = static_cast<Symbol>(chosen_int);*/
             
-            string inbox1 =  input_2.get_string();
+            string inbox1 = input_2.get_string();
             Symbol chosen_sym = StrToSymbol( inbox1 );
             
             //get appropiate Money and add its money afterwards
