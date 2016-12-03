@@ -522,11 +522,11 @@ try{
         Money* m = bank.getMoney();
         double amount = m->getAmount();
         
-        windows[i-1]->usd_out.put(to_string( amount*xRateFromTo(Symbol::USD,static_cast<Symbol>(i))));
-        windows[i-1]->gbp_out.put(to_string( amount*xRateFromTo(Symbol::USD,static_cast<Symbol>(i))));
-        windows[i-1]->eur_out.put(to_string( amount*xRateFromTo(Symbol::USD,static_cast<Symbol>(i))));
-        windows[i-1]->jpy_out.put(to_string( amount*xRateFromTo(Symbol::USD,static_cast<Symbol>(i))));
-        windows[i-1]->rub_out.put(to_string( amount*xRateFromTo(Symbol::USD,static_cast<Symbol>(i))));
+        windows[i-1]->usd_out.put(to_string( amount*xRateFromTo(static_cast<Symbol>(i),Symbol::USD)));
+        windows[i-1]->gbp_out.put(to_string( amount*xRateFromTo(static_cast<Symbol>(i),Symbol::GBP)));
+        windows[i-1]->eur_out.put(to_string( amount*xRateFromTo(static_cast<Symbol>(i),Symbol::EUR)));
+        windows[i-1]->jpy_out.put(to_string( amount*xRateFromTo(static_cast<Symbol>(i),Symbol::JPY)));
+        windows[i-1]->rub_out.put(to_string( amount*xRateFromTo(static_cast<Symbol>(i),Symbol::RUB)));
     } //end for
     
     return gui_main();  // inherited from Window; calls FLTK's run
