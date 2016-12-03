@@ -271,7 +271,7 @@ Bank_window::Bank_window(Point xy, int w, int h, const string& title) :
   //big text box initializations.
   bbox(
         Point(40,150),
-        680,350,
+        680,325,
         "L:"),
   // initialize the bank menu
   bank_menu(                        

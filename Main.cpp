@@ -175,7 +175,6 @@ void Bank_window::runMenu( char option )
                     
                     ss << fixed << setprecision(2)<< m->getAmount();
                     usd_out.put(ss.str());
-                    break; 
                 }else{
                     output_1.put("Account already exists");
                     output_2.put("try a different one");
