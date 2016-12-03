@@ -86,11 +86,11 @@ private:
   //----------------------------------------------------------------------------
   
   void addMoney_pressed(){
-    output_1.put("add/ cur, amt");
+    input_1.put("add/ cur, amt");
     menuChoice = 'A';
   }
   void remMoney_pressed(){
-    output_1.put("rem/ cur, amt");
+    input_1.put("rem/ cur, amt");
     menuChoice = 'B';
 
   }
@@ -99,35 +99,35 @@ private:
     menuChoice = 'C';
   }*/
   void addPatron_pressed(){
-    output_1.put("addP/ name, act, cur, amt");
+    input_1.put("addP/ name, act, cur, amt");
     menuChoice = 'D';
   }
   void isPatron_pressed(){
-    output_1.put("lookupP/ actnum");
+    input_1.put("lookupP/ actnum");
      menuChoice = 'E';
   }
   void patrons_pressed(){
-    output_1.put("Patrons");
+    input_1.put("Patrons");
      menuChoice = 'F';
   }
   void deposit_pressed(){
-    output_1.put("depP/ act, cur, amt");
+    input_1.put("depP/ act, cur, amt");
      menuChoice = 'G';
   }
   void withdraw_pressed(){
-    output_1.put("wtdP/ act, cur, amt");
+   input_1.put("wtdP/ act, cur, amt");
      menuChoice = 'H';
   }
   void overdrawn_pressed(){
-    output_1.put("deadbeats");
+    input_1.put("deadbeats");
      menuChoice = 'I';
   }
   void transactions_pressed(){
-    output_1.put("transactions");
+    input_1.put("transactions");
      menuChoice = 'J';
   }
   void transfer_pressed(){
-    output_1.put("transfer/ bnk,cur,amt");
+    input_1.put("transfer/ bnk,cur,amt");
      menuChoice = 'K';
   }
 
@@ -288,6 +288,10 @@ Bank_window::Bank_window(Point xy, int w, int h, const string& title) :
   // body of constructor follows
 {
   // attach buttons and boxes to window
+  
+  usd_out.put(bank.getMoney().getAmount());
+  
+  
   attach(usd_out);
   attach(gbp_out);
   attach(eur_out);
@@ -308,6 +312,8 @@ Bank_window::Bank_window(Point xy, int w, int h, const string& title) :
   attach(output_4);
   attach(output_5);
   attach(output_6);
+  
+  
     
   attach(bbox);
   attach(next_button);
