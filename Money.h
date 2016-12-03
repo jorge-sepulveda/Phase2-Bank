@@ -21,6 +21,8 @@ double xRateFromTo( Symbol from, Symbol to );
 
 string SymbolToStr( Symbol s );
 
+Symbol StrToSymbol( string s );
+
 //------------------------------------------------------------------------------
 
 class Money
@@ -43,6 +45,7 @@ public:
 	//setters and modifying functions
 	void add_money(double m);
 	void withdraw_money(double m);
+	
 };
 
 // Helper functions

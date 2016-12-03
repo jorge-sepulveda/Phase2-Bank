@@ -67,7 +67,7 @@ string SymbolToStr( Symbol s )
 	}
 }
 
-string StrToSymbol( string s ) 
+Symbol StrToSymbol( string s ) 
 {
 	switch( s ){
 		case "U" : return Symbol::USD; break;
