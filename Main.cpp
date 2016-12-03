@@ -151,35 +151,32 @@ void Bank_window::runMenu( char option )
             //cout << "Enter your name in the format 'First_Last': ";
             //cin >> name;
             
-            while(true) // loops until we break
-            {
-                //cout << "Enter a number between 1 and 9999 for your account number: ";
-                //cin >> accountNumber;
-                
-                if ( bank.findPatronByAcctNum( accountNumber ) == nullptr )
-                {
-                    //number is ok for usage
-                    balance *= xRateFromTo( chosen_sym, Symbol::USD);
             
-                    Patron patron(name, accountNumber, balance );
-                    bank.addPatron(patron);
-                    
-                    stringstream ss;
-                    ss << patron;
-                    bbox.put(ss.str());
-        
-                    ss.str(string());
-                    
-                    Money* m = bank.getMoney();
-                    m->add_money( balance );
-                    
-                    ss << fixed << setprecision(2)<< m->getAmount();
-                    usd_out.put(ss.str());
-                }else{
-                    output_1.put("Account already exists");
-                    output_2.put("try a different one");
-                }
+                
+            if ( bank.findPatronByAcctNum( accountNumber ) == nullptr )
+            {
+                //number is ok for usage
+                balance *= xRateFromTo( chosen_sym, Symbol::USD);
+            
+                Patron patron(name, accountNumber, balance );
+                bank.addPatron(patron);
+                        
+                stringstream ss;
+                ss << patron;
+                bbox.put(ss.str());
+            
+                ss.str(string());
+                        
+                Money* m = bank.getMoney();
+                m->add_money( balance );
+                        
+                ss << fixed << setprecision(2)<< m->getAmount();
+                usd_out.put(ss.str());
+            }else{
+                output_1.put("Account already exists");
+                output_2.put("try a different one");
             }
+            
             
             //cout << "Specify the currency type for starting balance (1=USD, 2=GBP, 3=EUR, 4=JPY, 5=RUB): ";
             //int chosen_int;
