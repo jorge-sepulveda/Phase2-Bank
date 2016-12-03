@@ -3,6 +3,7 @@
 #include "GUI.h"
 #include "Window.h"
 #include "Bank.h"
+#include "Money.h"
 
 using namespace Graph_lib;
 
@@ -289,7 +290,9 @@ Bank_window::Bank_window(Point xy, int w, int h, const string& title) :
 {
   // attach buttons and boxes to window
   Money *bm = bank.getMoney();
-  usd_out.put(bm->getAmount());
+  stringstream ss;
+  ss << bm->getAmount();
+  usd_out.put( ss.str() );
   
   
   attach(usd_out);
