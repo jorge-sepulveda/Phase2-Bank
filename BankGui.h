@@ -308,7 +308,7 @@ Bank_window::Bank_window(Point xy, int w, int h, const string& title) :
   attach(output_4);
   attach(output_5);
   attach(output_6);
-  
+    
   attach(bbox);
   attach(next_button);
   attach(quit_button);

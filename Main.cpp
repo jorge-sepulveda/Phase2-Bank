@@ -29,7 +29,7 @@ void Bank_window::runMenu( char option )
             int chosen_int;
             //cin >> chosen_int;
             string inbox1 =  input_2.get_string();
-            Symbol chosen_sym = Money::StrToSymbol( inbox1 );
+            Symbol chosen_sym = StrToSymbol( inbox1 );
             
             //get appropiate Money and add its money afterwards
             //cout << "Enter the amount to add to the bank (nonnegative number): ";
@@ -48,6 +48,8 @@ void Bank_window::runMenu( char option )
             
             add_amount *= xRateFromTo( chosen_sym, Symbol::USD );
             bm->add_money( add_amount );
+            
+            
             stringstream ss;
             ss << *bm;
             
