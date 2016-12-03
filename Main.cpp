@@ -188,7 +188,7 @@ void Bank_window::runMenu( char option )
             Money* m = bank.getMoney();
             m->add_money( balance );
             
-            ss << fixed << setprecision(2)<< bm->getAmount();
+            ss << fixed << setprecision(2)<< m->getAmount();
             usd_out.put(ss.str());
             
             
@@ -242,7 +242,7 @@ void Bank_window::runMenu( char option )
                 
                 ss << patron << "\n";
             }
-            bbox.put(ss.str())
+            bbox.put(ss.str());
             
             break;
         }
