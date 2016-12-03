@@ -374,7 +374,11 @@ void Bank_window::runMenu( char option )
             // Just exits the bank, ask for text file within switch.
             cout << "Exiting Bank...\n";
             
-            cout << "Enter the name of the file to save the bank (or just enter to quit): ";
+            string defaultSymbol = SymbolToStr( bank.getDefaultSymbol() );
+            
+            
+            
+            cout << "Enter the name of the file to save the "<< defaultSymbol << " bank (or just enter to quit): ";
             string filename("");
             cin >> filename;
             
