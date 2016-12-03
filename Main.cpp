@@ -278,10 +278,10 @@ void Bank_window::runMenu( char option )
                 bm->add_money( amount );
                 
                 stringstream ss;
-                ss << fixed << setprecision(2)<< m->getAmount();
-                usd_out(ss.str());
+                ss << fixed << setprecision(2)<< bm->getAmount();
+                usd_out.put(ss.str());
                 
-                bank.addTransaction( Transaction( *patron, "deposit", deposit_amount) );
+                bank.addTransaction( Transaction( *patron, "deposit", amount) );
                 bbox.put("deposit successful");
             }
             
@@ -312,7 +312,7 @@ void Bank_window::runMenu( char option )
                 Symbol chosen_sym = StrToSymbol( inboxcur );
             
                 
-                double amount = stod ( input_4 );
+                double amount = stod( input_4 );
                 
                 amount *= xRateFromTo( chosen_sym, Symbol::USD);
                 
@@ -333,11 +333,11 @@ void Bank_window::runMenu( char option )
                     }
                     
                     stringstream ss;
-                    ss << fixed << setprecision(2)<< m->getAmount();
+                    ss << fixed << setprecision(2)<< bm->getAmount();
                     usd_out(ss.str());
                     bbox.put("withdrawal successful");
                     
-                    bank.addTransaction( Transaction( *patron, "withdrawal", withdrawl_amount) );
+                    bank.addTransaction( Transaction( *patron, "withdrawal", amount) );
                 }
             }
             
