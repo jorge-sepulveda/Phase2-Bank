@@ -453,7 +453,7 @@ try{
         bank.setMoney( m );
     }
     
-    Bank_window win(Point(100,100),900,500,"Bank phase 2 window");
+    Bank_window win(Point(100,100),900,500,"Bank Database");
     
     return gui_main();  // inherited from Window; calls FLTK's run
 
