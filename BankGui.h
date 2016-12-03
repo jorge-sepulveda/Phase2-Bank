@@ -18,6 +18,12 @@ struct Bank_window : Graph_lib::Window {       // inherits from Window
          int w,                // width
          int h,                // height
          const string& title); // label
+  Out_box usd_out;
+  Out_box gbp_out;
+  Out_box eur_out;
+  Out_box jpy_out;
+  Out_box rub_out;
+  Out_box all_out;
 
 private:
   // data members
@@ -31,12 +37,7 @@ private:
   Button menu_button;                // button to display the color menu
 
   //out boxes for top bar of displaying all the monies.
-  Out_box usd_out;
-  Out_box gbp_out;
-  Out_box eur_out;
-  Out_box jpy_out;
-  Out_box rub_out;
-  Out_box all_out;
+
 
   //inboxes for input.
   Out_box input_1;
