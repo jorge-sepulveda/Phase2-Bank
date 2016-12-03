@@ -2,11 +2,7 @@
 #include "Graph.h"     // next 3 are for graphics library
 #include "GUI.h"
 #include "Window.h"
-
-// declaration for the menu
-void runMenu( char option );
-
-char menuChoice='';
+#include "Bank.h"
 
 using namespace Graph_lib;
 
@@ -15,7 +11,7 @@ using namespace Graph_lib;
 // be entered via a GUI
 
 struct Bank_window : Graph_lib::Window {       // inherits from Window
-
+  
   // constructor
   Bank_window(Point xy,             // top lefthand corner
          int w,                // width
@@ -24,6 +20,8 @@ struct Bank_window : Graph_lib::Window {       // inherits from Window
 
 private:
   // data members
+  Bank bank; // holds data for this window's bank
+  char menuChoice='x';
 
   // widgets:
   Button next_button;                // button indicating next DLL point is ready
@@ -80,6 +78,8 @@ private:
   void next();   // defined below
 
   void quit();   // defined below
+  
+  void runMenu( char option );  // <----main menu function
   
   //----------------------------------------------------------------------------
   // Callback Functions
@@ -321,7 +321,7 @@ Bank_window::Bank_window(Point xy, int w, int h, const string& title) :
 
   bank_menu.attach(new Button(Point(0,0),0,0,"Add Money",cb_addMoney)); 
   bank_menu.attach(new Button(Point(0,0),0,0,"Remove Money",cb_remMoney));
-  bank_menu.attach(new Button(Point(0,0),0,0,"Add Patron",cb_addPatron()));
+  bank_menu.attach(new Button(Point(0,0),0,0,"Add Patron",cb_addPatron));
   bank_menu.attach(new Button(Point(0,0),0,0,"Patron Lookup",cb_isPatron));
   bank_menu.attach(new Button(Point(0,0),0,0,"Patron List",cb_Patrons));
   bank_menu.attach(new Button(Point(0,0),0,0,"Deposit",cb_deposit));
